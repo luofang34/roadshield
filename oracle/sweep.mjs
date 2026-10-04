@@ -101,7 +101,12 @@ const page = await context.newPage();
 await page.route("https://webfont.americanamap.org/noto/*", (route) => {
   const name = new URL(route.request().url()).pathname.split("/").pop();
   try {
-    route.fulfill({ body: readFileSync(join(resolve(opt.inputs), name)), contentType: "font/woff2" });
+    route.fulfill({
+      body: readFileSync(join(resolve(opt.inputs), name)),
+      contentType: "font/woff2",
+      // Cross-origin web fonts are discarded without CORS approval.
+      headers: { "access-control-allow-origin": "*" },
+    });
   } catch {
     // Upstream fonts the pack does not ship (its letterless Armenian
     // PropNums build) come from the live host, as upstream sees them.
@@ -117,6 +122,11 @@ const result = await page.evaluate(
     const stack = '"Noto Sans Condensed", "Noto Sans Armenian Condensed", sans-serif-condensed, "Arial Narrow", sans-serif';
     await document.fonts.load(`condensed 500 12px ${stack}`);
     await document.fonts.ready;
+    // Comparing against a fallback font would be meaningless.
+    const noto = [...document.fonts].find((f) => f.family.replace(/"/g, "") === "Noto Sans Condensed");
+    if (!noto || noto.status !== "loaded") {
+      throw new Error(`Noto Sans Condensed did not load (status ${noto?.status ?? "missing"})`);
+    }
     const wasm = await import("/wasm/roadshield_wasm.js");
     await wasm.default("/wasm/roadshield_wasm_bg.wasm");
     const shields = new wasm.RoadShield();

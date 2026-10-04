@@ -71,10 +71,11 @@ jobs:
       - name: Install Chromium
         working-directory: .upstream/openstreetmap-americana
         run: npx playwright install --with-deps chromium
-      - name: Sweep every network against the upstream renderer
-        run: |
-          node oracle/sweep.mjs --dpr 1
-          node oracle/sweep.mjs --dpr 2
+      - name: Sweep every network against the upstream renderer (1x)
+        run: node oracle/sweep.mjs --dpr 1
+      - name: Sweep every network against the upstream renderer (2x)
+        if: success() || failure()
+        run: node oracle/sweep.mjs --dpr 2
       - if: always()
         uses: actions/upload-artifact@v4
         with:
