@@ -25,6 +25,12 @@ jobs:
       - run: cargo clippy --all-targets -- -D warnings
       - run: cargo test --all-targets
       - run: cargo test --doc --workspace
+      - name: Examples run
+        run: |
+          cargo run -p roadshield --example readme && test -s cr609.svg
+          cargo run -p roadshield --example diagnostics
+          cargo run -p roadshield --example concurrency > concurrency.svg
+          cargo run -p roadshield --example readme_images -- target/readme-images
       - run: cargo doc --no-deps
         env:
           RUSTDOCFLAGS: -D missing_docs -D broken_intra_doc_links

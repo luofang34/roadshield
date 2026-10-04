@@ -21,6 +21,3 @@ wuff = "0.2"
 
 [lints]
 workspace = true
-
-[dev-dependencies]
-tracing-subscriber = { version = "0.3", default-features = false, features = ["fmt"] }
