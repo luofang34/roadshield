@@ -1,0 +1,85 @@
+{
+  "pack_id": "americana",
+  "themes": [
+    "default"
+  ],
+  "upstream": {
+    "repository": "https://github.com/osm-americana/openstreetmap-americana",
+    "commit": "a6817efecac86762896052379248cc3bc98cfae8"
+  },
+  "rules": {
+    "file": "shields.json",
+    "url": "https://americanamap.org/shields.json",
+    "sha256": "1d8fd8c60ed1dddd5d032b9c5e89d99c0e75864342e635c6a417ebce9d2bc2a2"
+  },
+  "sprite_sizes": {
+    "file": "sprite.json",
+    "url": "https://americanamap.org/sprites/sprite.json",
+    "sha256": "5bc13df8d812bef40427f4f5caeeb8af42a33d6ad3b17665deda1c1ed1fc9fa9"
+  },
+  "blank_license": {
+    "id": "CC0-1.0",
+    "upstream_path": "LICENSE",
+    "attribution": "OpenStreetMap Americana contributors; shields inspired by Rebusurance by Minh Nguyễn"
+  },
+  "fonts": [
+    {
+      "id": "noto-sans-condensed-medium",
+      "family": "Noto Sans Condensed",
+      "file": "NotoSans-CondensedMedium-PropNums.woff2",
+      "url": "https://webfont.americanamap.org/noto/NotoSans-CondensedMedium-PropNums.woff2",
+      "sha256": "3ad1b8b262f0c3d20b2543cb67c95bc7ca24110deb61e05b23728fe2ab4b7f0d",
+      "license": {
+        "id": "OFL-1.1",
+        "file": "OFL-latin-greek-cyrillic.txt",
+        "url": "https://raw.githubusercontent.com/notofonts/latin-greek-cyrillic/main/OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+        "attribution": "Copyright 2022 The Noto Project Authors"
+      }
+    },
+    {
+      "id": "noto-sans-armenian-condensed-medium",
+      "family": "Noto Sans Armenian Condensed",
+      "file": "NotoSansArmenian-CondensedMedium.ttf",
+      "url": "https://raw.githubusercontent.com/notofonts/notofonts.github.io/1aaeb679c5818b9de345434746aee04a84dd056b/fonts/NotoSansArmenian/unhinted/ttf/NotoSansArmenian-CondensedMedium.ttf",
+      "sha256": "2bb6818b98ab122d3ef8f22d88b0d78a95a91fb173470c520c428f55b14d6022",
+      "license": {
+        "id": "OFL-1.1",
+        "file": "OFL-armenian.txt",
+        "url": "https://raw.githubusercontent.com/notofonts/armenian/NotoSansArmenian-v2.008/OFL.txt",
+        "sha256": "0468358b316f69f405b55cadf8a8314e16e3610b8feaad96772bd5d968112d02",
+        "attribution": "Copyright 2022 The Noto Project Authors"
+      }
+    },
+    {
+      "id": "noto-sans-georgian-condensed-medium",
+      "family": "Noto Sans Georgian Condensed",
+      "file": "NotoSansGeorgian-CondensedMedium.ttf",
+      "url": "https://raw.githubusercontent.com/notofonts/notofonts.github.io/c7548c79bba5a7c582b4c2123a1d3486b3959e19/fonts/NotoSansGeorgian/unhinted/ttf/NotoSansGeorgian-CondensedMedium.ttf",
+      "sha256": "bf9fccf8dcbd07c709bc205c43457100a98afa86b6b6b14da7a55cbd7e760ec4",
+      "license": {
+        "id": "OFL-1.1",
+        "file": "OFL-georgian.txt",
+        "url": "https://raw.githubusercontent.com/notofonts/georgian/NotoSansGeorgian-v2.005/OFL.txt",
+        "sha256": "8c02263c5d73d40544f9ed91e30c4e947407057a3cc430d7b786189aeceff6df",
+        "attribution": "Copyright 2022 The Noto Project Authors"
+      }
+    }
+  ],
+  "font_stack": [
+    "noto-sans-condensed-medium",
+    "noto-sans-armenian-condensed-medium",
+    "noto-sans-georgian-condensed-medium"
+  ],
+  "engine_sources": [
+    "shieldlib/src/shield.ts",
+    "shieldlib/src/shield_text.ts",
+    "shieldlib/src/shield_canvas_draw.ts",
+    "shieldlib/src/custom_shields.ts",
+    "shieldlib/src/shield_banner.ts",
+    "shieldlib/src/screen_gfx.ts",
+    "shieldlib/src/shield_renderer.ts",
+    "shieldlib/src/shield_helper.ts",
+    "shieldlib/src/types.ts"
+  ]
+}

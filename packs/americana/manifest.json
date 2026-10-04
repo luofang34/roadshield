@@ -1,0 +1,2714 @@
+{
+  "format": 1,
+  "id": "americana",
+  "content_hash": "33d4378f6b5792223feb63f48f9102224925705103ea8528e493553a57a111f0",
+  "upstream": {
+    "repository": "https://github.com/osm-americana/openstreetmap-americana",
+    "commit": "a6817efecac86762896052379248cc3bc98cfae8",
+    "rules_source": {
+      "url": "https://americanamap.org/shields.json",
+      "sha256": "1d8fd8c60ed1dddd5d032b9c5e89d99c0e75864342e635c6a417ebce9d2bc2a2"
+    },
+    "engine_sources": [
+      {
+        "path": "shieldlib/src/shield.ts",
+        "sha256": "442693fc688f1448430097cb2e3ba400116e5bc1a24c2a176c83291e22ab2d42"
+      },
+      {
+        "path": "shieldlib/src/shield_text.ts",
+        "sha256": "64dfd75fe25f1e85e5e99fbeb94c6671210019a40363e53bb269c67bd27bf197"
+      },
+      {
+        "path": "shieldlib/src/shield_canvas_draw.ts",
+        "sha256": "a9190c08e8815a45f9efc7f423c9490e4854db55b8ebb0a74f1e4f2ed201baa8"
+      },
+      {
+        "path": "shieldlib/src/custom_shields.ts",
+        "sha256": "d8135a55bb866817e4bfe3ae1f2898e1ee849886bd51d9b8239b980545cf7968"
+      },
+      {
+        "path": "shieldlib/src/shield_banner.ts",
+        "sha256": "c6fdd6650f6f9de1c4be77a7b2fd968c590d850f274e9b821530050dd7b6b2ce"
+      },
+      {
+        "path": "shieldlib/src/screen_gfx.ts",
+        "sha256": "40581307ed743070c38e3caac11cf23fe895e41165a34ca9cc0cb6f84b97ad0e"
+      },
+      {
+        "path": "shieldlib/src/shield_renderer.ts",
+        "sha256": "02d8b122c3c3c37abf424b9be3dbe01d4bab5c43588e06f0282b9bf0584e7403"
+      },
+      {
+        "path": "shieldlib/src/shield_helper.ts",
+        "sha256": "033ba8be6b74db4a6ed80852589684c9685c82d70a3303b8c95efb64d05bfae4"
+      },
+      {
+        "path": "shieldlib/src/types.ts",
+        "sha256": "fe80846a71acb695f4d23dd8f3365eede17078ef9230debdeb361dd49d2151df"
+      }
+    ]
+  },
+  "rules": {
+    "path": "rules/shields.json",
+    "blake3": "4bef5924c6dac4a4fe7ce893cd0ae446a7b1e28beefd3724da5eee554b253e6f",
+    "bytes": 497316
+  },
+  "blanks": [
+    {
+      "id": "shield40_us_nm_2",
+      "file": {
+        "path": "blanks/shield40_us_nm_2.svg",
+        "blake3": "7aa4c3b7fb203374305bc6f8357788a6ea770068c68032e2f4c6e6ddade0bb70",
+        "bytes": 986
+      },
+      "width": 25.0,
+      "height": 25.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield40_us_nm_3",
+      "file": {
+        "path": "blanks/shield40_us_nm_3.svg",
+        "blake3": "c935f9c2e656eed51d82c16b5a6848b114775b8c34483c5476410449614707f5",
+        "bytes": 1113
+      },
+      "width": 33.0,
+      "height": 25.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_badge_2",
+      "file": {
+        "path": "blanks/shield_badge_2.svg",
+        "blake3": "277f60cb5947fb3889160fa9500f2e1deb8c9a70d53c674e6fe98df3ff754b62",
+        "bytes": 1210
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_badge_3",
+      "file": {
+        "path": "blanks/shield_badge_3.svg",
+        "blake3": "334468c66e87e1fbe0ef47e68be31c337bb0f978cf0f4809a29bd3d4383ffa01",
+        "bytes": 1151
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_badge_crossbar_2",
+      "file": {
+        "path": "blanks/shield_badge_crossbar_2.svg",
+        "blake3": "e211093a430a97922055a464ac3e2d51779e24f9c92d99dca5842e6404e28c50",
+        "bytes": 1377
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_badge_crossbar_3",
+      "file": {
+        "path": "blanks/shield_badge_crossbar_3.svg",
+        "blake3": "e7b7f3e9ac3571e5ed660d70703fc3d378c8d232ed2a4d2dcd1f1bd79c7511ac",
+        "bytes": 1318
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_bc_2",
+      "file": {
+        "path": "blanks/shield_ca_bc_2.svg",
+        "blake3": "09c45509d3bb4224bcbf245e574f0d94b03eab66e78782d218c0aff35f130572",
+        "bytes": 796
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_bc_3",
+      "file": {
+        "path": "blanks/shield_ca_bc_3.svg",
+        "blake3": "a8d34828b5e31ece44ace549e6197eceff12b964075279b30f142fc47a4f1e04",
+        "bytes": 798
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_nb",
+      "file": {
+        "path": "blanks/shield_ca_nb.svg",
+        "blake3": "34d41ef48f88fd51a4ea1a2263b017324bac59089a61bebbe3f27724429cd22c",
+        "bytes": 1766
+      },
+      "width": 22.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_ns_s_bdolsd",
+      "file": {
+        "path": "blanks/shield_ca_ns_s_bdolsd.svg",
+        "blake3": "6246e82b91d11bf55308f6a51be863d71060ae7778ef707e8981fd6e4c292609",
+        "bytes": 4499
+      },
+      "width": 17.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_ns_s_cet",
+      "file": {
+        "path": "blanks/shield_ca_ns_s_cet.svg",
+        "blake3": "8b64a582d2ff2750a704688c3562b3a07849cc840b2dd344c6138b2ee5f4d719",
+        "bytes": 4768
+      },
+      "width": 17.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_ns_s_ct",
+      "file": {
+        "path": "blanks/shield_ca_ns_s_ct.svg",
+        "blake3": "2f62e813238509bcb82c16ad55fab77c20a96c4ea9c5609073e5747f093f3066",
+        "bytes": 3387
+      },
+      "width": 17.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_ns_s_dnisd",
+      "file": {
+        "path": "blanks/shield_ca_ns_s_dnisd.svg",
+        "blake3": "3841a0cd1b8b6c5ff1239ae6c6316dbe8c3c6443bece931de887e05d909e3e21",
+        "bytes": 3284
+      },
+      "width": 17.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_ns_s_et",
+      "file": {
+        "path": "blanks/shield_ca_ns_s_et.svg",
+        "blake3": "6ab68a988df2039f0e7ce41f8a13978b0dd61f09a691036d87ac3a08f9ffcb62",
+        "bytes": 3503
+      },
+      "width": 17.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_ns_s_fdlt",
+      "file": {
+        "path": "blanks/shield_ca_ns_s_fdlt.svg",
+        "blake3": "59cfa9aa251810f69c63cd7a3f9acfdb7eb00a74ff5b5d549f9ae43de685d3e8",
+        "bytes": 4042
+      },
+      "width": 17.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_ns_s_gt",
+      "file": {
+        "path": "blanks/shield_ca_ns_s_gt.svg",
+        "blake3": "a035b16988e1f589aa04dcfc833ac3e742ad8fda3347d4e9b026c000d42f323e",
+        "bytes": 3451
+      },
+      "width": 17.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_ns_s_ksd",
+      "file": {
+        "path": "blanks/shield_ca_ns_s_ksd.svg",
+        "blake3": "e775427157c2b7deeb9c5689b2973a0b78820c627626bcb682859400fa1cea9b",
+        "bytes": 4306
+      },
+      "width": 17.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_ns_s_lr",
+      "file": {
+        "path": "blanks/shield_ca_ns_s_lr.svg",
+        "blake3": "334c7fb1c2e67824faafff3cf6f0a20d33772d38ea44c0ec23c20e9cdb62bb5e",
+        "bytes": 3494
+      },
+      "width": 17.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_ns_s_md",
+      "file": {
+        "path": "blanks/shield_ca_ns_s_md.svg",
+        "blake3": "47ff7b33a16c879af52f73ab92e63b19bd5bdb068e8a62fc175153533ed7bee0",
+        "bytes": 4093
+      },
+      "width": 17.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_ns_s_mdb",
+      "file": {
+        "path": "blanks/shield_ca_ns_s_mdb.svg",
+        "blake3": "feda6fc7569cc9c016982b0358be8b1e1433674cfef6faced4b5b17d8f0cac79",
+        "bytes": 4027
+      },
+      "width": 17.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_ns_s_mkb",
+      "file": {
+        "path": "blanks/shield_ca_ns_s_mkb.svg",
+        "blake3": "ef20c6a5f82822196300edf209caf69c004e0d4903cf91fb168537527c864c9c",
+        "bytes": 4027
+      },
+      "width": 17.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_ns_s_mt",
+      "file": {
+        "path": "blanks/shield_ca_ns_s_mt.svg",
+        "blake3": "97d011d2b4a90910a5ea3d742baba4abb256d1c77639cd7785bf025f6e9f5d5f",
+        "bytes": 3414
+      },
+      "width": 17.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_ns_s_st",
+      "file": {
+        "path": "blanks/shield_ca_ns_s_st.svg",
+        "blake3": "9db5984f5d8a93c037da4be63750a7105207595dd3244da0da57e308911149f7",
+        "bytes": 2618
+      },
+      "width": 17.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_nt",
+      "file": {
+        "path": "blanks/shield_ca_nt.svg",
+        "blake3": "d64f70ef7fa93b45ad55328121cc6d383371de9eb6a4d3c9f17f28b50e8d3036",
+        "bytes": 2018
+      },
+      "width": 20.0,
+      "height": 22.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_on_hamilton_blue",
+      "file": {
+        "path": "blanks/shield_ca_on_hamilton_blue.svg",
+        "blake3": "71dfccb42fe2e46624708a45e7a734f6108bdc6a1195abccea22890d52f8d682",
+        "bytes": 1605
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_on_hamilton_green",
+      "file": {
+        "path": "blanks/shield_ca_on_hamilton_green.svg",
+        "blake3": "aa4631d81e141678802a1aeed4dd1e82705e18220cd7db879ac27ba632e1b778",
+        "bytes": 1584
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_on_primary",
+      "file": {
+        "path": "blanks/shield_ca_on_primary.svg",
+        "blake3": "246e6550390f171bad5b5e600272ef94f2332bbe2d0d94edcdfbc34df527cafb",
+        "bytes": 2499
+      },
+      "width": 24.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_on_toronto",
+      "file": {
+        "path": "blanks/shield_ca_on_toronto.svg",
+        "blake3": "c79b01e1c1fee14d343dd57c4ee09eba167ea52c64d46cfddc01fed180b2fdf3",
+        "bytes": 245
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_pe",
+      "file": {
+        "path": "blanks/shield_ca_pe.svg",
+        "blake3": "3d2b88617b7fe718e32e63e96a6d4c402d47da6da1d368c69aede9998bf91c46",
+        "bytes": 863
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_qc_a_2",
+      "file": {
+        "path": "blanks/shield_ca_qc_a_2.svg",
+        "blake3": "9f792a447fe00d178996b67c72b283ff5bdce61bb1abadb8c56877c6dab00ecd",
+        "bytes": 481
+      },
+      "width": 18.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_qc_a_3",
+      "file": {
+        "path": "blanks/shield_ca_qc_a_3.svg",
+        "blake3": "64c45ba1696bdbf8ae3f1d0588e896d8de5140d7d18383a8e0eb5016dce4dc21",
+        "bytes": 478
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_qc_r",
+      "file": {
+        "path": "blanks/shield_ca_qc_r.svg",
+        "blake3": "718977c27708fb687ede16669cec24788460ab94faaa90f241fb00ac2559bce0",
+        "bytes": 1006
+      },
+      "width": 21.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_sk_secondary",
+      "file": {
+        "path": "blanks/shield_ca_sk_secondary.svg",
+        "blake3": "59a7e72f639fbb99341ee662c9ba16c63c0b67bce9e7d9969c0f31ff95fbcb46",
+        "bytes": 2063
+      },
+      "width": 20.0,
+      "height": 22.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_tch_2",
+      "file": {
+        "path": "blanks/shield_ca_tch_2.svg",
+        "blake3": "c4e506ede20f277f8541a8eddf8a61f90375fe545d8b9d900d686fa6243fe4a8",
+        "bytes": 5844
+      },
+      "width": 22.0,
+      "height": 22.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ca_tch_3",
+      "file": {
+        "path": "blanks/shield_ca_tch_3.svg",
+        "blake3": "3d1c350fd5a38c340dd8e69e8fd04f2d3b93f60fd1aa43829be7fe2000198ca0",
+        "bytes": 5841
+      },
+      "width": 27.0,
+      "height": 22.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_cn_expressway_2",
+      "file": {
+        "path": "blanks/shield_cn_expressway_2.svg",
+        "blake3": "91eeb57d8a2a439b2eb4261a64736a8c111712a231bc1c7b5ca954907803704b",
+        "bytes": 492
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_cn_expressway_3",
+      "file": {
+        "path": "blanks/shield_cn_expressway_3.svg",
+        "blake3": "abed63a54c0aca79ef7abc3912200420eff804fa83ae7839907fe14aff7301bf",
+        "bytes": 492
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_cn_expressway_4",
+      "file": {
+        "path": "blanks/shield_cn_expressway_4.svg",
+        "blake3": "586135aa3c26f1295f677d5df8c53bb5f7cf5cc4cb3ca4e49b3af58e883b0118",
+        "bytes": 492
+      },
+      "width": 30.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_co_national_2",
+      "file": {
+        "path": "blanks/shield_co_national_2.svg",
+        "blake3": "26cc826f8b12a8cfa86ebd9ab621b833769de87ee789ac9bfd8f0eb6843a45b0",
+        "bytes": 576
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_co_national_3",
+      "file": {
+        "path": "blanks/shield_co_national_3.svg",
+        "blake3": "2e7dd01273ad93af134391635abdf7658d0cea7a732a6aa0a9f880170f5529c8",
+        "bytes": 534
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ec_secundaria_2",
+      "file": {
+        "path": "blanks/shield_ec_secundaria_2.svg",
+        "blake3": "8a651077acdfd1bcd762b0f4932dae7a024f93eb8a33a5b215281871a9b64505",
+        "bytes": 1890
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ec_secundaria_3",
+      "file": {
+        "path": "blanks/shield_ec_secundaria_3.svg",
+        "blake3": "a0dcf8fd7c87d99fc2c78eb679b0522e5fd1af8e30b8e0364cafb064ce35ab11",
+        "bytes": 1874
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ec_secundaria_4",
+      "file": {
+        "path": "blanks/shield_ec_secundaria_4.svg",
+        "blake3": "e2bcb5a29fe421930eedf026739f8c33460f59c32a0af574ce7c74870956a024",
+        "bytes": 1986
+      },
+      "width": 30.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_escutcheon_crossbar_2",
+      "file": {
+        "path": "blanks/shield_escutcheon_crossbar_2.svg",
+        "blake3": "11ab951d146259f79041470ec85c26c4daa77aa61d03deb2da4d4ae5b3021d46",
+        "bytes": 512
+      },
+      "width": 18.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_escutcheon_crossbar_3",
+      "file": {
+        "path": "blanks/shield_escutcheon_crossbar_3.svg",
+        "blake3": "a7304eb9a527fdc8327e368d60127c8072169e8b03ba1033427af6837ac30d2d",
+        "bytes": 509
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_glct_lect",
+      "file": {
+        "path": "blanks/shield_glct_lect.svg",
+        "blake3": "4477a7c75b118a94296e53b379e9a595aadf1450dc27f07a1d5bcbeabca51a18",
+        "bytes": 2231
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_glct_lhct",
+      "file": {
+        "path": "blanks/shield_glct_lhct.svg",
+        "blake3": "a389c5d411daa67ed229a320ee91a26bb2f4caba75c8ef910ad21aee8d971119",
+        "bytes": 4207
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_glct_lmct",
+      "file": {
+        "path": "blanks/shield_glct_lmct.svg",
+        "blake3": "5a6ba18a2bf75d680389671af49674004a998369df84192aa2b8906547f342ce",
+        "bytes": 7910
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_glct_lsct",
+      "file": {
+        "path": "blanks/shield_glct_lsct.svg",
+        "blake3": "8ce1f069d44ed34515e3e79245c390bdeab11d612fe9777f824896ec83ae82b7",
+        "bytes": 3328
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_id_national",
+      "file": {
+        "path": "blanks/shield_id_national.svg",
+        "blake3": "9586d25625882ae0347259b6fc082611e1da169910efc8046fee0940a91a33be",
+        "bytes": 1683
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_in_nh_2",
+      "file": {
+        "path": "blanks/shield_in_nh_2.svg",
+        "blake3": "881b9b360f4479b42b700f20d58f87ca266cb47a63923ee02ef27af9bdbb0c3c",
+        "bytes": 1057
+      },
+      "width": 16.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_in_nh_3",
+      "file": {
+        "path": "blanks/shield_in_nh_3.svg",
+        "blake3": "e9ca4de36ff7daf6d00b5aa98b0f8cdf1c098d16ec2d1242ba2011ef2959cfd0",
+        "bytes": 1077
+      },
+      "width": 22.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_in_nh_4",
+      "file": {
+        "path": "blanks/shield_in_nh_4.svg",
+        "blake3": "257d4c3420c9f3026836f190d759f9257cb5ac054f965a1ff2c0005e4ec530a5",
+        "bytes": 1081
+      },
+      "width": 28.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_kr_expressway_2",
+      "file": {
+        "path": "blanks/shield_kr_expressway_2.svg",
+        "blake3": "df466e57384d2fdf4d9fa37f687801654aa900b9c0c0145a1bd01375b6c5e9fe",
+        "bytes": 2035
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_kr_expressway_3",
+      "file": {
+        "path": "blanks/shield_kr_expressway_3.svg",
+        "blake3": "85dee92cd6ebe89d59b92a3fba7da051c20ee1d6dbb6d81c94c334eb4ddc071b",
+        "bytes": 2022
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_kr_municipal",
+      "file": {
+        "path": "blanks/shield_kr_municipal.svg",
+        "blake3": "a9504bc8af4dca3786ae65c9d7f62038f12d4bd4cbf73051049b6ee07746cf8a",
+        "bytes": 705
+      },
+      "width": 27.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_kr_municipal_4",
+      "file": {
+        "path": "blanks/shield_kr_municipal_4.svg",
+        "blake3": "8cee9377ba4b577c60c12f166fecb3abd725cac99dde3e548a3efe5debb9403c",
+        "bytes": 706
+      },
+      "width": 35.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_kr_municipal_motorway",
+      "file": {
+        "path": "blanks/shield_kr_municipal_motorway.svg",
+        "blake3": "708daae4513b4ee4b3263ad033e82513fb311272662bca8d2fd3938501dad6e4",
+        "bytes": 876
+      },
+      "width": 27.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_mx_cdmx_eje_central",
+      "file": {
+        "path": "blanks/shield_mx_cdmx_eje_central.svg",
+        "blake3": "88832920ba900a6487bdabd793cc305fb2aa62c76b01c2395e79bb0eeb2468ec",
+        "bytes": 543
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_mx_cdmx_eje_nte",
+      "file": {
+        "path": "blanks/shield_mx_cdmx_eje_nte.svg",
+        "blake3": "8423997febcc9679e367dfc73c0e093e27ce94cc211bd4d3ba8665f46e94014d",
+        "bytes": 784
+      },
+      "width": 20.0,
+      "height": 26.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_mx_cdmx_eje_ote",
+      "file": {
+        "path": "blanks/shield_mx_cdmx_eje_ote.svg",
+        "blake3": "97e1490bc89a658e1059846e65e1625eeb8ec56b75758264abfd50356f96056b",
+        "bytes": 1439
+      },
+      "width": 26.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_mx_cdmx_eje_pte",
+      "file": {
+        "path": "blanks/shield_mx_cdmx_eje_pte.svg",
+        "blake3": "710f5cc60f5fc0e4487b428ce7f23aa8bf8ead3b729497f9b0a99f7efe86390d",
+        "bytes": 980
+      },
+      "width": 26.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_mx_cdmx_eje_sur",
+      "file": {
+        "path": "blanks/shield_mx_cdmx_eje_sur.svg",
+        "blake3": "52bd9dd47c83df7a4478654e7b9b99d9a3f0e7cdeed0d3b378cf859b83af6e2d",
+        "bytes": 2623
+      },
+      "width": 20.0,
+      "height": 26.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_mx_mx_2",
+      "file": {
+        "path": "blanks/shield_mx_mx_2.svg",
+        "blake3": "9ab768a3e22f9d1da379fb584469132b949ec9f9cc36a08d543a64737238a924",
+        "bytes": 1102
+      },
+      "width": 16.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_mx_mx_3",
+      "file": {
+        "path": "blanks/shield_mx_mx_3.svg",
+        "blake3": "3b478ff3bbfe9870b4e03d16ba1cefb105cf64cebfd2c0de02e621697a769da0",
+        "bytes": 1098
+      },
+      "width": 22.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_mx_mx_4",
+      "file": {
+        "path": "blanks/shield_mx_mx_4.svg",
+        "blake3": "04147ec223da6e0f25f6fdb58498c8d92fcd13665593ebbebe16e3d1c2590c52",
+        "bytes": 1102
+      },
+      "width": 28.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_nl_city",
+      "file": {
+        "path": "blanks/shield_nl_city.svg",
+        "blake3": "1cf3b8dc7deb1ca6af1156a32b19139881d754457db577f0e64f7b92e5ff4277",
+        "bytes": 2080
+      },
+      "width": 35.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_nl_dr_hunebed",
+      "file": {
+        "path": "blanks/shield_nl_dr_hunebed.svg",
+        "blake3": "bab33f019150c7a240400ec7ff2d2164df5291be82506a7eeb27cdfe1fc2c816",
+        "bytes": 2011
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_nz_ah",
+      "file": {
+        "path": "blanks/shield_nz_ah.svg",
+        "blake3": "ceaec176069e6a621de9d04d146a721ad3bd246198e26a7d821afca5ab9fe453",
+        "bytes": 241
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_nz_pch",
+      "file": {
+        "path": "blanks/shield_nz_pch.svg",
+        "blake3": "50027b8b9a41ef31d1ef6639d58fce6e2c09ae422d4e4f059bcf759ec71b6e7f",
+        "bytes": 497
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_nz_slh",
+      "file": {
+        "path": "blanks/shield_nz_slh.svg",
+        "blake3": "9e9309f27951dbd6170baac27f1f716e778455cfcaa61a3a43f7bd03c3f84450",
+        "bytes": 1073
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_nz_ssr",
+      "file": {
+        "path": "blanks/shield_nz_ssr.svg",
+        "blake3": "7e6720469bb04045e2eb54dba20c5397ac326277438c2d4e58a0c6a1bc8f790c",
+        "bytes": 845
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_nz_tcdh",
+      "file": {
+        "path": "blanks/shield_nz_tcdh.svg",
+        "blake3": "a0d269b9a1e764b7e72b7bc7c855e6b9c2516de3f98a47cfbd8c6887c424b67a",
+        "bytes": 559
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_nz_teh",
+      "file": {
+        "path": "blanks/shield_nz_teh.svg",
+        "blake3": "fb9c9eb59d4de4ae4acc92bda158598fd52500adf31250eb873344475f88867e",
+        "bytes": 417
+      },
+      "width": 20.0,
+      "height": 27.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_nz_vlh",
+      "file": {
+        "path": "blanks/shield_nz_vlh.svg",
+        "blake3": "9dd9cd4e39b96fe85a1de8857c0b4e532655f9eb227e8be9512d908dc6c412e1",
+        "bytes": 631
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_nz_wine",
+      "file": {
+        "path": "blanks/shield_nz_wine.svg",
+        "blake3": "47653b417d8a49bb86630aa3b864320acf90c6ac5e9370d343209290ac052988",
+        "bytes": 753
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_nz_wrr",
+      "file": {
+        "path": "blanks/shield_nz_wrr.svg",
+        "blake3": "f70966609b94c7d5f808776aa620ce4bfed6308dbafc9631405698a124c35d7d",
+        "bytes": 613
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_pe_2",
+      "file": {
+        "path": "blanks/shield_pe_2.svg",
+        "blake3": "f09a7bd86cbaddcca56eb15e0e24f4f23eb81a6e69b05a861615f355623e51b3",
+        "bytes": 1958
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_pe_3",
+      "file": {
+        "path": "blanks/shield_pe_3.svg",
+        "blake3": "a7f2df13db8fb83e5831f2d3f0eba2db46953efd26be595aa7493b329ad70f37",
+        "bytes": 1752
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_pk_motorway",
+      "file": {
+        "path": "blanks/shield_pk_motorway.svg",
+        "blake3": "c957203c7a98cdc3ae6faba3939dae75e83a132db0b1bcbc3505f2375f42bace",
+        "bytes": 356
+      },
+      "width": 34.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_tri_convex_2",
+      "file": {
+        "path": "blanks/shield_tri_convex_2.svg",
+        "blake3": "37bbb2d211a1924592aba79ed9792c4696c6d18dd6938b83060abd0cea086b03",
+        "bytes": 674
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_tri_convex_3",
+      "file": {
+        "path": "blanks/shield_tri_convex_3.svg",
+        "blake3": "99d9fc5850adbfde69cbd76a21770788ec8ae4641c6d016e23c420e4efd2fe45",
+        "bytes": 918
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_tw_freeway",
+      "file": {
+        "path": "blanks/shield_tw_freeway.svg",
+        "blake3": "c3d8f6ee5f467fec2f8dfc977534b4d34b6a55435f1fbd039b95c671d9c26074",
+        "bytes": 2815
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ak",
+      "file": {
+        "path": "blanks/shield_us_ak.svg",
+        "blake3": "22ba36bef3ae92f889a289b7cef8a2854edff7ec8fe7b88648cb7da9f72947a4",
+        "bytes": 1291
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_al_2",
+      "file": {
+        "path": "blanks/shield_us_al_2.svg",
+        "blake3": "b24a14e88373c6b089a489dda5e0ddc1c7e57195fcedfba5b49071c3562e8e8f",
+        "bytes": 901
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_al_3",
+      "file": {
+        "path": "blanks/shield_us_al_3.svg",
+        "blake3": "47c3ca198fac643ff666f07baa135aaa475547dd1a7cda1a98f6038cced4db5a",
+        "bytes": 902
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_al_foley",
+      "file": {
+        "path": "blanks/shield_us_al_foley.svg",
+        "blake3": "b64faca3fe7053db26f08641e6827fce0db29b9ccb5fa985d2ef8b2d2d6e7fd2",
+        "bytes": 2122
+      },
+      "width": 24.0,
+      "height": 24.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ar_2",
+      "file": {
+        "path": "blanks/shield_us_ar_2.svg",
+        "blake3": "0f3340b8ba5acb7dbed6f664610aabfaecb20e8d639f086848dd4c2b4ded07d0",
+        "bytes": 1308
+      },
+      "width": 21.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ar_3",
+      "file": {
+        "path": "blanks/shield_us_ar_3.svg",
+        "blake3": "2a3ff141be6ad37e38c1d5171c642d8746724edb9d841068671eee0951741642",
+        "bytes": 1340
+      },
+      "width": 26.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_as",
+      "file": {
+        "path": "blanks/shield_us_as.svg",
+        "blake3": "9b3aa6c2476d5a83e0ba98da81e1f81f8f31cf46dc30eee426e40d5fd71ea460",
+        "bytes": 654
+      },
+      "width": 23.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_az_2",
+      "file": {
+        "path": "blanks/shield_us_az_2.svg",
+        "blake3": "37b328d39c374533040713949a2cb1cd8affb4b36a361e73a96bc81b260d124e",
+        "bytes": 244
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_az_3",
+      "file": {
+        "path": "blanks/shield_us_az_3.svg",
+        "blake3": "7570ba300aedd023e96f6e958a7c7dacd72c56bf570a01ea5a96c3eaf3925ea3",
+        "bytes": 246
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_az_indian",
+      "file": {
+        "path": "blanks/shield_us_az_indian.svg",
+        "blake3": "383bcc2503d5c13141c077867dacc371ead92153e988ba4fcad9d381c4f84f6b",
+        "bytes": 1518
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_az_scenic",
+      "file": {
+        "path": "blanks/shield_us_az_scenic.svg",
+        "blake3": "6bb5e95b983115976dd44e196f61d20def5c148b00437f6b0d10d902587c6493",
+        "bytes": 3979
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_bia",
+      "file": {
+        "path": "blanks/shield_us_bia.svg",
+        "blake3": "29f0b5d12e1e169104644e7e27ee3bd23c6c1fa4df0adcb4e98c9343e236463d",
+        "bytes": 1540
+      },
+      "width": 20.0,
+      "height": 24.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ca_2",
+      "file": {
+        "path": "blanks/shield_us_ca_2.svg",
+        "blake3": "10fcc3b073fc1d31f2c946179e4f161fa7ac4d3af0d0a24d8d86ebf5ede3c383",
+        "bytes": 651
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ca_3",
+      "file": {
+        "path": "blanks/shield_us_ca_3.svg",
+        "blake3": "b238f60c30d90cb1aa80e1906629988d6bf60ef5ddd631b2844f11a2059d0fc3",
+        "bytes": 649
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ca_sf_49",
+      "file": {
+        "path": "blanks/shield_us_ca_sf_49.svg",
+        "blake3": "82186b563665c40355f0912fc5fcf6b063e45566ce5fe41ead1c02f5f096d64e",
+        "bytes": 1607
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ckc",
+      "file": {
+        "path": "blanks/shield_us_ckc.svg",
+        "blake3": "3b65b34b75da3a89c8414965f712e8ea12e236a4613edbdeec2b74d33ca4f1ff",
+        "bytes": 1482
+      },
+      "width": 35.0,
+      "height": 18.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_co",
+      "file": {
+        "path": "blanks/shield_us_co.svg",
+        "blake3": "8e8ea07251b71e7ba795a1959c396919192baa89a483b02ecb2473f24ada2570",
+        "bytes": 717
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_co_e470",
+      "file": {
+        "path": "blanks/shield_us_co_e470.svg",
+        "blake3": "629d929c98359cc6e1140631f0b69b907444bc0de72460970050921549084e8e",
+        "bytes": 616
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_co_nw",
+      "file": {
+        "path": "blanks/shield_us_co_nw.svg",
+        "blake3": "b1055f6dcdc4ad0a7186953f7fdc7e68007639ed3d5c3d93e342affed18389d5",
+        "bytes": 1582
+      },
+      "width": 20.0,
+      "height": 22.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_co_scenic",
+      "file": {
+        "path": "blanks/shield_us_co_scenic.svg",
+        "blake3": "f43597044ce3464d8b80350febeb778ee48b47c403bff6edc2868317f3c281cc",
+        "bytes": 5276
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ct_parkway_merritt",
+      "file": {
+        "path": "blanks/shield_us_ct_parkway_merritt.svg",
+        "blake3": "52f8595cf5c63ff613c9e11b37752ef2857e9b5cd5913a440f2457297c00910d",
+        "bytes": 17739
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_dc",
+      "file": {
+        "path": "blanks/shield_us_dc.svg",
+        "blake3": "98f2f5359b3d17473e38451db2541238b593069e58145ebe9c3907a9f46fc0eb",
+        "bytes": 2759
+      },
+      "width": 20.0,
+      "height": 22.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_fl_2",
+      "file": {
+        "path": "blanks/shield_us_fl_2.svg",
+        "blake3": "6123f2266e22f404883ec4354b5086d9ccb6c64e0f6c1e2386958ab3088f8721",
+        "bytes": 2389
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_fl_3",
+      "file": {
+        "path": "blanks/shield_us_fl_3.svg",
+        "blake3": "d020db0ffaf338d338a76f26b57c7b90e0d8b8d0e01a4736079dd8a2fa7b672c",
+        "bytes": 2401
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_fl_toll",
+      "file": {
+        "path": "blanks/shield_us_fl_toll.svg",
+        "blake3": "8fc66d55433568f243c741133628d887ae49329d59146c9cec748d8508f4c15d",
+        "bytes": 1491
+      },
+      "width": 20.0,
+      "height": 22.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_fl_turnpike",
+      "file": {
+        "path": "blanks/shield_us_fl_turnpike.svg",
+        "blake3": "30e1341650deb8d4c215a95f7aa3b71f939fb23c55f336299bdf54a6d10ca47e",
+        "bytes": 3357
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ga_2",
+      "file": {
+        "path": "blanks/shield_us_ga_2.svg",
+        "blake3": "369b9317919a18b1536cff2225b654824c698eb669795c75f5f9a891094d8478",
+        "bytes": 1229
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ga_3",
+      "file": {
+        "path": "blanks/shield_us_ga_3.svg",
+        "blake3": "d3d93da34cd1f0bfa3c829d37bc96a369d3d5914cfb947ef159f3e2ce6c8743d",
+        "bytes": 1234
+      },
+      "width": 26.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_glst",
+      "file": {
+        "path": "blanks/shield_us_glst.svg",
+        "blake3": "c98a60c44e5866ad7e1efd2c68c5736598d99e9f3e310c0fc38a3f83d1b96fa7",
+        "bytes": 1124
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_grr",
+      "file": {
+        "path": "blanks/shield_us_grr.svg",
+        "blake3": "09552f4238bbf465f8108c93236abcb39146304659a6774317fc8cdd526ceadd",
+        "bytes": 4648
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_gu_2",
+      "file": {
+        "path": "blanks/shield_us_gu_2.svg",
+        "blake3": "af20f0de98d9cca8965acfe4bff03ad8b95b01d79d1f7e3e7faca3c83dc7b0b2",
+        "bytes": 1149
+      },
+      "width": 17.0,
+      "height": 24.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_gu_3",
+      "file": {
+        "path": "blanks/shield_us_gu_3.svg",
+        "blake3": "b2beffd62b8869d8faa7f1641a07ba71cd8ea009cce62f81a055c0c99cd327ad",
+        "bytes": 1154
+      },
+      "width": 21.0,
+      "height": 24.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_id_2",
+      "file": {
+        "path": "blanks/shield_us_id_2.svg",
+        "blake3": "fd24e1a5b0ddf94eeab55e346e086a13bca6475e19f93eeff4fb5050b3eff995",
+        "bytes": 436
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_id_3",
+      "file": {
+        "path": "blanks/shield_us_id_3.svg",
+        "blake3": "a00b34075c1ddd4dc65e38cf590171ab97bc96920492c41d87acb8de33568f07",
+        "bytes": 493
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_il_skyway",
+      "file": {
+        "path": "blanks/shield_us_il_skyway.svg",
+        "blake3": "18f5c279a3ee86ae63232f54d97db73c7f6f479126a396d68969865c8f37bebd",
+        "bytes": 487
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_in_jhmht",
+      "file": {
+        "path": "blanks/shield_us_in_jhmht.svg",
+        "blake3": "8c9ab76902208a4c410f465fba0fa5609db0b9d94a757c4c925c44c76d191c84",
+        "bytes": 4628
+      },
+      "width": 18.0,
+      "height": 22.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_in_toll",
+      "file": {
+        "path": "blanks/shield_us_in_toll.svg",
+        "blake3": "edb231a0c28609e65f9f2a124f14c2144b5621ae65f1d441674ea1da02bd6517",
+        "bytes": 3117
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_interstate_2",
+      "file": {
+        "path": "blanks/shield_us_interstate_2.svg",
+        "blake3": "2bb9b05c13488783e580f7b6445e34506b06b80b6516e848c64c8f3161438cb8",
+        "bytes": 1890
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_interstate_3",
+      "file": {
+        "path": "blanks/shield_us_interstate_3.svg",
+        "blake3": "3061f983060108e6cb84772d737b77f0112372accd1ab92ad7072f3d66d8351c",
+        "bytes": 1874
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_interstate_business_2",
+      "file": {
+        "path": "blanks/shield_us_interstate_business_2.svg",
+        "blake3": "67ba8d4992316a176053398eab2c47a8bdf71a13e94a6f609df8463893ec11bd",
+        "bytes": 1010
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_interstate_business_3",
+      "file": {
+        "path": "blanks/shield_us_interstate_business_3.svg",
+        "blake3": "989307b1aacc301ece2c7b06ff6c31e0e55d07de22e2293e6063861c07a1562a",
+        "bytes": 987
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ks_2",
+      "file": {
+        "path": "blanks/shield_us_ks_2.svg",
+        "blake3": "45df1b3ab527eeb0e84fc1077ffe1e34af09d665df4ef2f28b85cb601b285b3c",
+        "bytes": 70692
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ks_3",
+      "file": {
+        "path": "blanks/shield_us_ks_3.svg",
+        "blake3": "9330f56902c63a230ba0fb6179d3836f3bb05d942acf3f26b3b0a2f17cf390d9",
+        "bytes": 67344
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ks_turnpike",
+      "file": {
+        "path": "blanks/shield_us_ks_turnpike.svg",
+        "blake3": "46f9a478cac62a93fe47066dc310b164f50c30705d751fd5aa9e1276d42bca37",
+        "bytes": 70936
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ky_parkway",
+      "file": {
+        "path": "blanks/shield_us_ky_parkway.svg",
+        "blake3": "0c05598bd8528717047d715e803da625855cd81ada21af21246b25f836f10143",
+        "bytes": 509
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_la_2",
+      "file": {
+        "path": "blanks/shield_us_la_2.svg",
+        "blake3": "3cfc54c15f99bac39ed54a2e1f5f0327e8716cad6210eea2bbe21f757b680703",
+        "bytes": 911
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_la_3",
+      "file": {
+        "path": "blanks/shield_us_la_3.svg",
+        "blake3": "5628913e9503ab9c9e798efe5983f1cad97c6217b36163df26ad3158fc88679a",
+        "bytes": 1062
+      },
+      "width": 26.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_la_causeway",
+      "file": {
+        "path": "blanks/shield_us_la_causeway.svg",
+        "blake3": "33d96c300c68a76b8d69a8779a7016f5e19dc03c2a53cfadb7a4705937014e03",
+        "bytes": 1010
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_lht",
+      "file": {
+        "path": "blanks/shield_us_lht.svg",
+        "blake3": "cb4e10742997b5f764ac344428ddc895343ef39a869565ae4951ae2352308ed8",
+        "bytes": 21293
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ma_pike",
+      "file": {
+        "path": "blanks/shield_us_ma_pike.svg",
+        "blake3": "b04c8b9d083376fe19d75e877dda6cb2a41fb5e5508f41324d21844d8b722d09",
+        "bytes": 711
+      },
+      "width": 19.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_md_2",
+      "file": {
+        "path": "blanks/shield_us_md_2.svg",
+        "blake3": "eb703029f83ccacdbf024b6ef36066dafdcc0cdc2b0b521d8c68b8a28dea1794",
+        "bytes": 553
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_md_3",
+      "file": {
+        "path": "blanks/shield_us_md_3.svg",
+        "blake3": "c22006750c52481b648dce52d006c76996056e6071aa52108e938b9960ebbeb0",
+        "bytes": 553
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_me_turnpike",
+      "file": {
+        "path": "blanks/shield_us_me_turnpike.svg",
+        "blake3": "df43eff6e918b1a21ed1185597c257c2115947b2167b136f27533ce593ff01ae",
+        "bytes": 1634
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_mn_2",
+      "file": {
+        "path": "blanks/shield_us_mn_2.svg",
+        "blake3": "4f45703e8017d7df5fd79981f0b21858befae547ed89aebdff6f44afd7a852a9",
+        "bytes": 1944
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_mn_3",
+      "file": {
+        "path": "blanks/shield_us_mn_3.svg",
+        "blake3": "7f96475951017a5ed698dc9329dada13bc5f600209475ba600ee1341a6a2cd2a",
+        "bytes": 1945
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_mn_business_2",
+      "file": {
+        "path": "blanks/shield_us_mn_business_2.svg",
+        "blake3": "ecd5aeb3e1ae18398e3ef12f9d0cfad360ef21eb58e88e5e7251123fc44e6a74",
+        "bytes": 1941
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_mn_business_3",
+      "file": {
+        "path": "blanks/shield_us_mn_business_3.svg",
+        "blake3": "5c3e18c144c989cce0e9dd02a37f4e1a6bb14923e504ee8229a6dd3896fce12d",
+        "bytes": 1942
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_mo_2",
+      "file": {
+        "path": "blanks/shield_us_mo_2.svg",
+        "blake3": "59198b71d4562f9b867e98bf11c41a170681439a3cbb11fd122112bac9ab235c",
+        "bytes": 3636
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_mo_3",
+      "file": {
+        "path": "blanks/shield_us_mo_3.svg",
+        "blake3": "134b592f65738a0237587a3b03042b29e0394b3ab362d5e6e3f311359058106a",
+        "bytes": 3672
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_mp_2",
+      "file": {
+        "path": "blanks/shield_us_mp_2.svg",
+        "blake3": "47bc7c0e0484b1f75cbaefe306084d643d04b8c40d77dc4e0461f065ab0b5762",
+        "bytes": 309
+      },
+      "width": 21.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_mp_3",
+      "file": {
+        "path": "blanks/shield_us_mp_3.svg",
+        "blake3": "7589e75258c8bc3830073364b9aec61dc28f302b9780bbc7cd1865d9864cba90",
+        "bytes": 309
+      },
+      "width": 27.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_mt_secondary",
+      "file": {
+        "path": "blanks/shield_us_mt_secondary.svg",
+        "blake3": "93e440ee93264bbb89b77acebdddee4c4ec2d94ca37c9d5a56a534337c5d8b15",
+        "bytes": 2033
+      },
+      "width": 20.0,
+      "height": 26.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_navajo_2",
+      "file": {
+        "path": "blanks/shield_us_navajo_2.svg",
+        "blake3": "75585cf9c19f978629a1c179a9d3540ddcd1e01eb87b28c4f8853b4ac8d35eb0",
+        "bytes": 1257
+      },
+      "width": 20.0,
+      "height": 24.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_navajo_3",
+      "file": {
+        "path": "blanks/shield_us_navajo_3.svg",
+        "blake3": "7033b871a4b565b1892e63866c82b3ada9b4a0b7033bb05e73891880e77d645c",
+        "bytes": 1286
+      },
+      "width": 30.0,
+      "height": 24.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_navajo_4",
+      "file": {
+        "path": "blanks/shield_us_navajo_4.svg",
+        "blake3": "079a141c9e3d373c38df198b8209a344ea8d9df730fea88a7ad2c262a9ae8611",
+        "bytes": 1287
+      },
+      "width": 35.0,
+      "height": 24.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nd_2",
+      "file": {
+        "path": "blanks/shield_us_nd_2.svg",
+        "blake3": "827db5d2b02bf60a35bc41833d2f8e3f2522f3fd7b55d827aa8deab4fc3e64af",
+        "bytes": 733
+      },
+      "width": 27.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nd_3",
+      "file": {
+        "path": "blanks/shield_us_nd_3.svg",
+        "blake3": "04ec61eecf1b785af8fa3cb7bc8ced11bf97937ef5c5de5c4452f7665eed5f62",
+        "bytes": 733
+      },
+      "width": 35.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ne_byway_noref",
+      "file": {
+        "path": "blanks/shield_us_ne_byway_noref.svg",
+        "blake3": "ffaedc1069803aa01f25737e538d54e93805485a91aef1bcb91c5abaff1ed749",
+        "bytes": 32383
+      },
+      "width": 28.0,
+      "height": 28.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nh_2",
+      "file": {
+        "path": "blanks/shield_us_nh_2.svg",
+        "blake3": "ef4872f3b4a9959924a65bd443911aeed4618e8715b602eef2b630f309e380b9",
+        "bytes": 3036
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nh_3",
+      "file": {
+        "path": "blanks/shield_us_nh_3.svg",
+        "blake3": "4ea6c2f9f989a5bacb8926cdc5f212dbfb62e57e201b9eef18d043c7f5263637",
+        "bytes": 3037
+      },
+      "width": 26.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nh_turnpike",
+      "file": {
+        "path": "blanks/shield_us_nh_turnpike.svg",
+        "blake3": "70d0635d49adb6770a0586e42b718056a49a09e15ee12a9831f0ae08aa8d7497",
+        "bytes": 785
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nht_cali",
+      "file": {
+        "path": "blanks/shield_us_nht_cali.svg",
+        "blake3": "8bf944b1848f2422c0f87e0396018347d0dc37ad8d7a9c01c312297e41655b96",
+        "bytes": 4450
+      },
+      "width": 22.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nht_juba",
+      "file": {
+        "path": "blanks/shield_us_nht_juba.svg",
+        "blake3": "87c78bacc37aa3058b7e5de417311b2c72aaf9f9fd37183e1d1b4d268b879362",
+        "bytes": 59479
+      },
+      "width": 22.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nht_lecl",
+      "file": {
+        "path": "blanks/shield_us_nht_lecl.svg",
+        "blake3": "df890290ca5fc7dfd729db72c8ea34c40689fab2327496e58fc497f90492058b",
+        "bytes": 83632
+      },
+      "width": 22.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nht_mopi",
+      "file": {
+        "path": "blanks/shield_us_nht_mopi.svg",
+        "blake3": "ed8b0e12397ab0a60a3b6caa836371010a9ced33ec7975b01187d900758dc4ec",
+        "bytes": 13196
+      },
+      "width": 22.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nht_nez_perce",
+      "file": {
+        "path": "blanks/shield_us_nht_nez_perce.svg",
+        "blake3": "0236f0f38bb163abaac757c1d053b38eff6d094e112cb9cca4cf5927da41b631",
+        "bytes": 70850
+      },
+      "width": 22.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nht_oreg",
+      "file": {
+        "path": "blanks/shield_us_nht_oreg.svg",
+        "blake3": "3accaf28d7878ffaa65549d57c6b067cdd03edc0edd8857bad723df1c44d094a",
+        "bytes": 20969
+      },
+      "width": 22.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nht_ovvi",
+      "file": {
+        "path": "blanks/shield_us_nht_ovvi.svg",
+        "blake3": "41f2b60fa631b3c3be5c66e00e47a67fad467663ff5d61ce548ed87d48cb5696",
+        "bytes": 8503
+      },
+      "width": 22.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nht_poex",
+      "file": {
+        "path": "blanks/shield_us_nht_poex.svg",
+        "blake3": "9c316b567711a216a20afc2b4701380b76d275e90a9003d72223da4c104807b4",
+        "bytes": 13603
+      },
+      "width": 22.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nht_safe",
+      "file": {
+        "path": "blanks/shield_us_nht_safe.svg",
+        "blake3": "5c02d7b399e6487f8264b97d80ccfdd8fd97f6d10948a5a1aca1acf7e67d2935",
+        "bytes": 22507
+      },
+      "width": 22.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nht_semo",
+      "file": {
+        "path": "blanks/shield_us_nht_semo.svg",
+        "blake3": "a7d1a6f43cff621990473875576fa4b31b316659ab6c990949cb9bd029bd6266",
+        "bytes": 21011
+      },
+      "width": 22.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nj_ace_noref",
+      "file": {
+        "path": "blanks/shield_us_nj_ace_noref.svg",
+        "blake3": "bca9db7e9bc4d33fdb52e00b5ec0a10385b6f40e5fb5dfb11123f354adb76e76",
+        "bytes": 1579
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nj_gsp_noref",
+      "file": {
+        "path": "blanks/shield_us_nj_gsp_noref.svg",
+        "blake3": "417ad032ec1d9def9d850cf62c7b31043f0316fe85220ec2899ab66a0431717b",
+        "bytes": 10050
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nj_njtp_noref",
+      "file": {
+        "path": "blanks/shield_us_nj_njtp_noref.svg",
+        "blake3": "a318c70676c28ac7a9380c2c1f1b724590a6a83697f040e884536617bc7b44d1",
+        "bytes": 666
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nm_frontage",
+      "file": {
+        "path": "blanks/shield_us_nm_frontage.svg",
+        "blake3": "b3adac4720ce06dfbdd306e9d5f2daeebe1a36e3edb5a2d068ab55f52ea4ac6d",
+        "bytes": 407
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nps_brp",
+      "file": {
+        "path": "blanks/shield_us_nps_brp.svg",
+        "blake3": "56edae9fed576e8e7385ac29247c5383dc7f4464fbbe8abe1c7ddaaaa72a2056",
+        "bytes": 7493
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nps_ntp",
+      "file": {
+        "path": "blanks/shield_us_nps_ntp.svg",
+        "blake3": "4f8c28f3845a0c4c9a1aa20e6287d080e90914bcc141958fb1643b47872548f1",
+        "bytes": 3100
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nv",
+      "file": {
+        "path": "blanks/shield_us_nv.svg",
+        "blake3": "12a05584a4d1eef936e69c7ccda60fcd6240c0bc3a6efd49843d748f22fffe00",
+        "bytes": 324
+      },
+      "width": 18.0,
+      "height": 24.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_nv_clark",
+      "file": {
+        "path": "blanks/shield_us_nv_clark.svg",
+        "blake3": "a63bd859619d66073e3664b76f9ece0598dd582349aca265ef0373f6ea3c797b",
+        "bytes": 2110
+      },
+      "width": 30.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_2",
+      "file": {
+        "path": "blanks/shield_us_ny_2.svg",
+        "blake3": "d4e32c369abbc0514df498d5377f57f4735dbdce3f23a5c9127ab02a509e75d4",
+        "bytes": 793
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_3",
+      "file": {
+        "path": "blanks/shield_us_ny_3.svg",
+        "blake3": "cb885de114a55cfa6884edea234db21f5dd65aad9ac7edd587c49065f553aea5",
+        "bytes": 775
+      },
+      "width": 26.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_parkway_li",
+      "file": {
+        "path": "blanks/shield_us_ny_parkway_li.svg",
+        "blake3": "70c5c50809e8376d09b10f6f59e58bd908816b4970ce8231832457ea484d3a2d",
+        "bytes": 3442
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_parkway_losp",
+      "file": {
+        "path": "blanks/shield_us_ny_parkway_losp.svg",
+        "blake3": "54e23c15e7156cdd98db3a00e664c0d9d7bf82c0f0419edb70a8f8663705ad87",
+        "bytes": 1905
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_parkway_nyc",
+      "file": {
+        "path": "blanks/shield_us_ny_parkway_nyc.svg",
+        "blake3": "a778857e82f99bf83b475041ce7e22ec6f5bbfd965e6eb2fc2f998c3206bbe86",
+        "bytes": 409
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_scenic_adirondack",
+      "file": {
+        "path": "blanks/shield_us_ny_scenic_adirondack.svg",
+        "blake3": "47130c6904747c4e47f054e1c8512b1ef6544e30294a5d14632b48535473293a",
+        "bytes": 7480
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_scenic_blackriver",
+      "file": {
+        "path": "blanks/shield_us_ny_scenic_blackriver.svg",
+        "blake3": "a8733dbfacf10f70661d45cd2531dfa62ce13a1c9384f4fa08747fd35f745888",
+        "bytes": 2576
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_scenic_catskillmountains",
+      "file": {
+        "path": "blanks/shield_us_ny_scenic_catskillmountains.svg",
+        "blake3": "a643952422a0af04892a983357db07cfdbd74fce9500e2e450ea8034ac65c1a3",
+        "bytes": 3378
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_scenic_centraladirondack",
+      "file": {
+        "path": "blanks/shield_us_ny_scenic_centraladirondack.svg",
+        "blake3": "d474d8bafe52e33bb61e19aeb9d127603a44b2ce6efc8e1bb03d75ac14e61766",
+        "bytes": 8865
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_scenic_duderanch",
+      "file": {
+        "path": "blanks/shield_us_ny_scenic_duderanch.svg",
+        "blake3": "af70157feb819558dd49c5161d75e5bc6dcd14e18bf041262c9e1a65466b360c",
+        "bytes": 1078
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_scenic_durham",
+      "file": {
+        "path": "blanks/shield_us_ny_scenic_durham.svg",
+        "blake3": "29758ca1e2f7ec3505b06255cb7dd117aae476297312ab666b00aaaf09b5b0bd",
+        "bytes": 1399
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_scenic_highpeaks",
+      "file": {
+        "path": "blanks/shield_us_ny_scenic_highpeaks.svg",
+        "blake3": "dd038ff31d8a749c62892c875f55c87ffd3f72e03cbbd6efafc156f46874d2be",
+        "bytes": 2120
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_scenic_mapletraditions",
+      "file": {
+        "path": "blanks/shield_us_ny_scenic_mapletraditions.svg",
+        "blake3": "db04571e74086f7c821b65d931175ac507b1fe23edcc9219bb31c777ba4c4924",
+        "bytes": 3285
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_scenic_olympic",
+      "file": {
+        "path": "blanks/shield_us_ny_scenic_olympic.svg",
+        "blake3": "25ecda1b07e3cb25ce25a6fdb00fa5ccd5451f33a576f0a61f1527974825ac3b",
+        "bytes": 1521
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_scenic_rooseveltmarcy",
+      "file": {
+        "path": "blanks/shield_us_ny_scenic_rooseveltmarcy.svg",
+        "blake3": "9252f68664f5142b9108e388915e2e8d5d2eb1c81a2dcb131d437dbb3afc21d4",
+        "bytes": 2232
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_scenic_shawangunk",
+      "file": {
+        "path": "blanks/shield_us_ny_scenic_shawangunk.svg",
+        "blake3": "2b009973de0fc0902e651e9737a15d89d6b3cbc2251e6a10f8ba52f4122c0d2d",
+        "bytes": 17484
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_scenic_southernadirondack",
+      "file": {
+        "path": "blanks/shield_us_ny_scenic_southernadirondack.svg",
+        "blake3": "4cd0bf53d5a1e2d3018c34be19fcc7263e10d57d1bbc835166281397a655b30a",
+        "bytes": 913
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_scenic_upperdelaware",
+      "file": {
+        "path": "blanks/shield_us_ny_scenic_upperdelaware.svg",
+        "blake3": "2fd9442e3d962f45d466f78a83b86865980666526cbbf504bb84787f5a5a6a7e",
+        "bytes": 10285
+      },
+      "width": 21.0,
+      "height": 21.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_scenic_wnysouthtowns",
+      "file": {
+        "path": "blanks/shield_us_ny_scenic_wnysouthtowns.svg",
+        "blake3": "1a038598eb89e666d7acf9872a0b241fe424f0ec317d43cf6a349ae8706e01f8",
+        "bytes": 9503
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_ste",
+      "file": {
+        "path": "blanks/shield_us_ny_ste.svg",
+        "blake3": "581069ac1ceb7b90ba3233055f3047d606ef3220e2e506e7bf0c9e767ed9068d",
+        "bytes": 8621
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_tbta_hughlcarey",
+      "file": {
+        "path": "blanks/shield_us_ny_tbta_hughlcarey.svg",
+        "blake3": "42b2213a6f353bd63c69e7a9c150408413b0c0e931345a56e5360a7c1211d588",
+        "bytes": 1323
+      },
+      "width": 22.0,
+      "height": 22.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_tbta_queensmidtown",
+      "file": {
+        "path": "blanks/shield_us_ny_tbta_queensmidtown.svg",
+        "blake3": "a60516eb27b7846b3b64195994aaafe237ddff9e2db7f86d1fa9d085837b98cb",
+        "bytes": 1632
+      },
+      "width": 22.0,
+      "height": 22.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ny_thruway",
+      "file": {
+        "path": "blanks/shield_us_ny_thruway.svg",
+        "blake3": "a7bc207c5c2421b0e7adc0e6805b54a919218a417b4d25feae4ea3a73da79803",
+        "bytes": 9082
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_oh_2",
+      "file": {
+        "path": "blanks/shield_us_oh_2.svg",
+        "blake3": "c1945b4b7a6da215ab0683967fbb8948cc30cda06eed64b0186e14cc5a9f2b7f",
+        "bytes": 1683
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_oh_3",
+      "file": {
+        "path": "blanks/shield_us_oh_3.svg",
+        "blake3": "250eb3ea5dc93e68e8ccb3d23bfdb7d6b4c9ee7cb5d6248440429accea03c2bb",
+        "bytes": 1684
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_oh_asd",
+      "file": {
+        "path": "blanks/shield_us_oh_asd.svg",
+        "blake3": "9fe4520ad6ffa3a39757249862fe9f69148368b5d6ce537dc4d11f00434839e4",
+        "bytes": 367
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_oh_hol",
+      "file": {
+        "path": "blanks/shield_us_oh_hol.svg",
+        "blake3": "d1ae84691873fe44cf469732035a4c1d9f44e5f3c57af356745fa6eb60a52c6c",
+        "bytes": 325
+      },
+      "width": 30.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_oh_jhmht",
+      "file": {
+        "path": "blanks/shield_us_oh_jhmht.svg",
+        "blake3": "18af1df1e11acb97a2fbc0be4413a38152bee333be67ab6ffec09b609ca38324",
+        "bytes": 5965
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_oh_oec",
+      "file": {
+        "path": "blanks/shield_us_oh_oec.svg",
+        "blake3": "388b1f08aca96063dd6ddc1041ec00e8c0f667b997f5980fdb0791ca96e848e5",
+        "bytes": 3209
+      },
+      "width": 28.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_oh_sci_2",
+      "file": {
+        "path": "blanks/shield_us_oh_sci_2.svg",
+        "blake3": "c8e6ac421ac1770708afc5c52045cba1190f14d6fb0dd91e89ea921bfc9633e9",
+        "bytes": 1109
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_oh_sci_3",
+      "file": {
+        "path": "blanks/shield_us_oh_sci_3.svg",
+        "blake3": "8e4812b1a0d5c7ab38de6632f14cb2684fe0afd57fd0c61f4e379c139a294a06",
+        "bytes": 1099
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_oh_turnpike",
+      "file": {
+        "path": "blanks/shield_us_oh_turnpike.svg",
+        "blake3": "e67e4c08db1e4e91d914375f3372959cee168ebb0589a8fcbddbdf3d2fc5dd8d",
+        "bytes": 8046
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_oh_tus_salem",
+      "file": {
+        "path": "blanks/shield_us_oh_tus_salem.svg",
+        "blake3": "889b2d281bb64958a557f4cb65342e993a652e207ed6ad7b2eea5c2b189520fd",
+        "bytes": 331
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ok_2",
+      "file": {
+        "path": "blanks/shield_us_ok_2.svg",
+        "blake3": "35a0546df2304b27784ac03253462c2f76dfae9aacadc10a981cdbe5ab91e8ed",
+        "bytes": 729
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ok_3",
+      "file": {
+        "path": "blanks/shield_us_ok_3.svg",
+        "blake3": "6ea6a3f3c30c1fd5d4d02555079d462e4d826d74f9ee78bb50e0b021fc7b0589",
+        "bytes": 717
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ok_turnpike",
+      "file": {
+        "path": "blanks/shield_us_ok_turnpike.svg",
+        "blake3": "25eb0c6cc4a33f04d62498396e4915e66127aeb91df42264aece9407d626486b",
+        "bytes": 4248
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_or_2",
+      "file": {
+        "path": "blanks/shield_us_or_2.svg",
+        "blake3": "467199e589fff71b3275dc3f36805abcd4e444004919702ba1ff2807504367fe",
+        "bytes": 1056
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_or_3",
+      "file": {
+        "path": "blanks/shield_us_or_3.svg",
+        "blake3": "0748171098fce7679861579bb9f5aa6a9a874cc1d0d1070bf87ddab1e8f9c492",
+        "bytes": 1127
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_orsb",
+      "file": {
+        "path": "blanks/shield_us_orsb.svg",
+        "blake3": "7cef5255b712f5b85dbb324a36bda9e65535e379528e6d893db184382d69a078",
+        "bytes": 1730
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_pa_2",
+      "file": {
+        "path": "blanks/shield_us_pa_2.svg",
+        "blake3": "327ddb1933315e9d36d805c92ed413059068edc7ce9c30be00dfb161f9e404a3",
+        "bytes": 173
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_pa_3",
+      "file": {
+        "path": "blanks/shield_us_pa_3.svg",
+        "blake3": "31f53573804f3a78874562944caf59e4defa7808fec63064b47a460952cb8e24",
+        "bytes": 173
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_pa_turnpike_noref",
+      "file": {
+        "path": "blanks/shield_us_pa_turnpike_noref.svg",
+        "blake3": "a2bc9765caffc7c33add2484a1c3f932f4b543e37ec24951a3562ef8c14a6f79",
+        "bytes": 2703
+      },
+      "width": 22.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_panynj_tunnel",
+      "file": {
+        "path": "blanks/shield_us_panynj_tunnel.svg",
+        "blake3": "acd34447c1490175e37ca66575698bd52c62080c3d98751e79f2de6dee788fcc",
+        "bytes": 1643
+      },
+      "width": 19.0,
+      "height": 19.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_pipc",
+      "file": {
+        "path": "blanks/shield_us_pipc.svg",
+        "blake3": "67654b54823129df8d597accb2c8c309f709bf4979d10a750a3e387c37e90976",
+        "bytes": 6771
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_sc",
+      "file": {
+        "path": "blanks/shield_us_sc.svg",
+        "blake3": "0f44b863537248f0c8dd6b4db5e92d25ca11492cc39391514beb9ec4bcbd1447",
+        "bytes": 1567
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_sd_2",
+      "file": {
+        "path": "blanks/shield_us_sd_2.svg",
+        "blake3": "2838441d056e4c6853b179468572b1daeb00c0be022bbf05442b37f819eb6c77",
+        "bytes": 976
+      },
+      "width": 23.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_sd_3",
+      "file": {
+        "path": "blanks/shield_us_sd_3.svg",
+        "blake3": "3e854cd7697ea4a8ba25ff413bf2b5ae7a4a2ead02b506e956ba50b067a139df",
+        "bytes": 1003
+      },
+      "width": 28.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_sd_csp",
+      "file": {
+        "path": "blanks/shield_us_sd_csp.svg",
+        "blake3": "6c68ab4c7c82f18217c78608b967f711b905f22e81401eb7f188e831cf5e0974",
+        "bytes": 3728
+      },
+      "width": 34.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_tn_primary",
+      "file": {
+        "path": "blanks/shield_us_tn_primary.svg",
+        "blake3": "d73b07b399a0cc9896b4a90eaa0747a99a3782b0190e576160524ce9557dd081",
+        "bytes": 1030
+      },
+      "width": 25.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_tx_fbctra",
+      "file": {
+        "path": "blanks/shield_us_tx_fbctra.svg",
+        "blake3": "726d46a375986cd6cd448930d35805050af4fec28042d5568a7a0d53ffed19f7",
+        "bytes": 470
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_tx_outline",
+      "file": {
+        "path": "blanks/shield_us_tx_outline.svg",
+        "blake3": "1ae12a0152e2a9100e8ea74c880c6793c4a3af4c30626cdcf8b57ccce7173922",
+        "bytes": 4138
+      },
+      "width": 27.0,
+      "height": 26.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ut_2",
+      "file": {
+        "path": "blanks/shield_us_ut_2.svg",
+        "blake3": "12b78ab857958e571bf02627070138314ae2879632b9283bc41e229344b43920",
+        "bytes": 1342
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_ut_3",
+      "file": {
+        "path": "blanks/shield_us_ut_3.svg",
+        "blake3": "eb0e1c01d67ce744b8f579c89b990a655ef24034d34d8b0fc92607974dec7ca3",
+        "bytes": 1578
+      },
+      "width": 26.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_vt_2",
+      "file": {
+        "path": "blanks/shield_us_vt_2.svg",
+        "blake3": "621c62e688760c4a9c776d1ba8f7a1fea9ef1ca6eab07d17fc6e8dfcc8974483",
+        "bytes": 995
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_vt_3",
+      "file": {
+        "path": "blanks/shield_us_vt_3.svg",
+        "blake3": "d2c2de29c905fbad34cb53861dfcf4586d61c8afe9da972442f0aca7d1dbe2a4",
+        "bytes": 997
+      },
+      "width": 26.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_wa",
+      "file": {
+        "path": "blanks/shield_us_wa.svg",
+        "blake3": "6e9fdc4486ec10258f60fa014022e46bf49467b031248a6bbe02f00c6376a9fb",
+        "bytes": 1774
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_wi_2",
+      "file": {
+        "path": "blanks/shield_us_wi_2.svg",
+        "blake3": "60dbd5f8cd47f202274c8a4428113a1faa059637fa96ac67969caeaec2e2fd70",
+        "bytes": 520
+      },
+      "width": 20.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_wi_3",
+      "file": {
+        "path": "blanks/shield_us_wi_3.svg",
+        "blake3": "2f82fa6414a44b473e6cf4dd697b413e5a60d88953fbd267bcc432c14296358c",
+        "bytes": 520
+      },
+      "width": 26.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_us_wi_rustic",
+      "file": {
+        "path": "blanks/shield_us_wi_rustic.svg",
+        "blake3": "643dc7f4b9d627e5fe78c5315153654e33c671806c798d0c12289f02d9848dcf",
+        "bytes": 1848
+      },
+      "width": 21.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "shield_ve_t",
+      "file": {
+        "path": "blanks/shield_ve_t.svg",
+        "blake3": "83d267c5524449547f0b2c36e80eb59b9a86afa7c722e4315332e2a269927160",
+        "bytes": 392
+      },
+      "width": 22.0,
+      "height": 20.0,
+      "license": "CC0-1.0"
+    }
+  ],
+  "fonts": [
+    {
+      "id": "noto-sans-condensed-medium",
+      "family": "Noto Sans Condensed",
+      "file": {
+        "path": "fonts/noto-sans-condensed-medium.ttf",
+        "blake3": "fcb9a195b3eb1899f2aad255986cbc059e023d1066140061ea7b9a7cd3935bea",
+        "bytes": 459188
+      },
+      "license": "OFL-1.1",
+      "source": {
+        "url": "https://webfont.americanamap.org/noto/NotoSans-CondensedMedium-PropNums.woff2",
+        "sha256": "3ad1b8b262f0c3d20b2543cb67c95bc7ca24110deb61e05b23728fe2ab4b7f0d"
+      }
+    },
+    {
+      "id": "noto-sans-armenian-condensed-medium",
+      "family": "Noto Sans Armenian Condensed",
+      "file": {
+        "path": "fonts/noto-sans-armenian-condensed-medium.ttf",
+        "blake3": "085dc695e0ec06ac33170d27ba4fd4497c42ed125a49f4309edb9b3593437d48",
+        "bytes": 18772
+      },
+      "license": "OFL-1.1",
+      "source": {
+        "url": "https://raw.githubusercontent.com/notofonts/notofonts.github.io/1aaeb679c5818b9de345434746aee04a84dd056b/fonts/NotoSansArmenian/unhinted/ttf/NotoSansArmenian-CondensedMedium.ttf",
+        "sha256": "2bb6818b98ab122d3ef8f22d88b0d78a95a91fb173470c520c428f55b14d6022"
+      }
+    },
+    {
+      "id": "noto-sans-georgian-condensed-medium",
+      "family": "Noto Sans Georgian Condensed",
+      "file": {
+        "path": "fonts/noto-sans-georgian-condensed-medium.ttf",
+        "blake3": "5e586adab9fb3525c5de666f1e2b58b6cebaf7690f02688bc03e998d936d4fd2",
+        "bytes": 35976
+      },
+      "license": "OFL-1.1",
+      "source": {
+        "url": "https://raw.githubusercontent.com/notofonts/notofonts.github.io/c7548c79bba5a7c582b4c2123a1d3486b3959e19/fonts/NotoSansGeorgian/unhinted/ttf/NotoSansGeorgian-CondensedMedium.ttf",
+        "sha256": "bf9fccf8dcbd07c709bc205c43457100a98afa86b6b6b14da7a55cbd7e760ec4"
+      }
+    }
+  ],
+  "font_stack": [
+    "noto-sans-condensed-medium",
+    "noto-sans-armenian-condensed-medium",
+    "noto-sans-georgian-condensed-medium"
+  ],
+  "licenses": [
+    {
+      "id": "CC0-1.0",
+      "file": {
+        "path": "licenses/CC0-1.0.txt",
+        "blake3": "b7a6a1ef44aa3647db780392b4fa023c613fd9fa482678bb7a729e5fe385ca00",
+        "bytes": 7048
+      },
+      "applies_to": [
+        "rules",
+        "blanks"
+      ],
+      "attribution": "OpenStreetMap Americana contributors; shields inspired by Rebusurance by Minh Nguyễn"
+    },
+    {
+      "id": "OFL-1.1",
+      "file": {
+        "path": "licenses/OFL-latin-greek-cyrillic.txt",
+        "blake3": "347bf2f0c4992ecf0abebdb585068899983a1f7b8aced2613ea4ce261d1be8d1",
+        "bytes": 4396
+      },
+      "applies_to": [
+        "noto-sans-condensed-medium"
+      ],
+      "attribution": "Copyright 2022 The Noto Project Authors"
+    },
+    {
+      "id": "OFL-1.1",
+      "file": {
+        "path": "licenses/OFL-armenian.txt",
+        "blake3": "40dd86d6d3a3751bc074c7bf0453f94e963859e40259185bdceaa9592f33e69c",
+        "bytes": 4384
+      },
+      "applies_to": [
+        "noto-sans-armenian-condensed-medium"
+      ],
+      "attribution": "Copyright 2022 The Noto Project Authors"
+    },
+    {
+      "id": "OFL-1.1",
+      "file": {
+        "path": "licenses/OFL-georgian.txt",
+        "blake3": "9e9879cab6922c007977beb572cabc9b2894e2111d9c48907e037270facba3da",
+        "bytes": 4384
+      },
+      "applies_to": [
+        "noto-sans-georgian-condensed-medium"
+      ],
+      "attribution": "Copyright 2022 The Noto Project Authors"
+    }
+  ],
+  "themes": [
+    "default"
+  ],
+  "subset": null
+}
