@@ -1,0 +1,27 @@
+[package]
+name = "roadshield-cli"
+description = "Command-line batch renderer and pack tooling for roadshield"
+publish = false
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "roadshield"
+path = "src/main.rs"
+doc = false
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", default-features = false, features = ["std", "help", "usage", "error-context"] }
+roadshield.workspace = true
+roadshield-import.workspace = true
+roadshield-raster.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+tracing-subscriber = { version = "0.3", default-features = false, features = ["fmt", "env-filter", "ansi"] }
+
+[lints]
+workspace = true
