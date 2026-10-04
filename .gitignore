@@ -1,0 +1,29 @@
+# Rust build output
+/target/
+**/target/
+**/*.rs.bk
+*.pdb
+
+# Leftovers from interactive cp/rm and editors
+*.bak
+*.orig
+*.swp
+*~
+* 2.rs
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Claude Code local state
+.claude/settings.local.json
+.claude/worktrees/
+CLAUDE.local.md
+
+# Upstream checkouts used by the import tool (pinned by hash, never vendored wholesale)
+/.upstream/
+
+# WASM build output
+/pkg/
