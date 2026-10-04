@@ -104,6 +104,7 @@ Conformance against the upstream TypeScript renderer, at the pinned commit:
 ./scripts/fetch-upstream.sh
 ./oracle/prepare-upstream.sh   # npm build of upstream; checks generated ShieldJSON == pack input
 wasm-pack build crates/roadshield-wasm --release --target web --out-dir ../../target/wasm-web
+export ORACLE_CHROME_CHANNEL=chrome   # Google Chrome; Playwright's headless shell ignores web fonts on canvas
 node oracle/sweep.mjs --dpr 1 && node oracle/sweep.mjs --dpr 2   # reports in target/oracle/
 ```
 

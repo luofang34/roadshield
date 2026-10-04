@@ -68,13 +68,17 @@ jobs:
           ./scripts/fetch-upstream.sh
           ./oracle/prepare-upstream.sh
       - run: wasm-pack build crates/roadshield-wasm --release --target web --out-dir ../../target/wasm-web
-      - name: Install Chromium
+      - name: Install Google Chrome
         working-directory: .upstream/openstreetmap-americana
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps chrome
       - name: Sweep every network against the upstream renderer (1x)
+        env:
+          ORACLE_CHROME_CHANNEL: chrome
         run: node oracle/sweep.mjs --dpr 1
       - name: Sweep every network against the upstream renderer (2x)
         if: success() || failure()
+        env:
+          ORACLE_CHROME_CHANNEL: chrome
         run: node oracle/sweep.mjs --dpr 2
       - if: always()
         uses: actions/upload-artifact@v4

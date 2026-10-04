@@ -59,6 +59,17 @@ impl RoadShield {
         serde_json::to_string(self.engine()?.rules()).map_err(js_err)
     }
 
+    /// Advance width of `text` at `font_px` with the pack's font stack, as
+    /// canvas `measureText().width` would report it.
+    #[wasm_bindgen(js_name = measureText)]
+    pub fn measure_text(&self, text: &str, font_px: f64) -> Result<f64, JsValue> {
+        let m = self
+            .engine()?
+            .measure_text(text, font_px, &DisplayContext::default())
+            .map_err(js_err)?;
+        Ok(m.width)
+    }
+
     /// Renders a route (`RouteDescriptor` JSON) with an optional
     /// `DisplayContext` JSON; returns the `Rendering` as JSON. Engine errors
     /// are thrown as JSON strings of `ShieldError`.

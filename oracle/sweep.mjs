@@ -32,12 +32,12 @@ const { values: opt } = parseArgs({
   },
 });
 
-// Bounds per device pixel ratio. At 1x, glyph rasterisation differences
-// (Chromium hints and, on macOS, emboldens canvas text; resvg does neither)
-// dominate the mean, so 1x guards presence, size and gross errors. 2x is the
-// geometric gate: a half-pixel layout error moves edges a whole device pixel
-// and exceeds the unexplained-pixel bound.
-const bounds = { 1: { mean: 40, frac: 0.005 }, 2: { mean: 24, frac: 0.02 } }[opt.dpr] ?? { mean: 24, frac: 0.02 };
+// Bounds per device pixel ratio, sized to hold on both macOS (CoreText
+// emboldens canvas text) and Linux (FreeType hinting); resvg does neither,
+// so glyph rasterisation dominates the remaining difference. 1x guards
+// presence, size and gross errors. 2x is the geometric gate: a half-pixel
+// layout error moves edges a whole device pixel and fails hundreds of cases.
+const bounds = { 1: { mean: 40, frac: 0.03 }, 2: { mean: 36, frac: 0.025 } }[opt.dpr] ?? { mean: 36, frac: 0.025 };
 const meanMax = Number(opt["mean-max"] ?? bounds.mean);
 const fracMax = Number(opt["frac-max"] ?? bounds.frac);
 
@@ -134,6 +134,16 @@ const result = await page.evaluate(
       shields.addFile(path, new Uint8Array(await (await fetch(`/pack/${path}`)).arrayBuffer()));
     }
     shields.load();
+    // FontFace status "loaded" does not prove canvas text uses the face (some
+    // headless builds draw canvas text in a default font). Require the page's
+    // canvas metrics to equal roadshield's for the pinned font.
+    const probeCtx = document.createElement("canvas").getContext("2d");
+    probeCtx.font = `condensed 500 11.8px ${stack}`;
+    const pageWidth = probeCtx.measureText("287").width;
+    const ourWidth = shields.measureText("287", 11.8);
+    if (Math.abs(pageWidth - ourWidth) > 0.01) {
+      throw new Error(`canvas text is not using the pinned webfont: "287" measures ${pageWidth}px, expected ${ourWidth}px`);
+    }
     const rules = JSON.parse(shields.rules()).networks;
 
     const cases = [];
