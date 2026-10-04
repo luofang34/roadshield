@@ -1,0 +1,49 @@
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+license = "AGPL-3.0-or-later"
+
+[workspace.dependencies]
+roadshield = { path = "crates/roadshield" }
+roadshield-raster = { path = "crates/roadshield-raster" }
+roadshield-import = { path = "crates/roadshield-import" }
+blake3 = { version = "1.8", default-features = false }
+csscolorparser = "0.9"
+harfrust = { version = "0.14", default-features = false, features = ["std"] }
+indexmap = { version = "2", features = ["serde"] }
+quick-xml = "0.42"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+skrifa = { version = "0.48", default-features = false, features = ["std"] }
+thiserror = "2"
+tiny-skia = "0.12"
+tracing = "0.1"
+usvg = { version = "0.48", default-features = false, features = ["writer"] }
+resvg = { version = "0.48", default-features = false }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+unwrap_used = "forbid"
+expect_used = "forbid"
+panic = "forbid"
+todo = "forbid"
+unimplemented = "forbid"
+unreachable = "forbid"
+exit = "forbid"
+mem_forget = "forbid"
+get_unwrap = "forbid"
+let_underscore_must_use = "deny"
+let_underscore_future = "deny"
+await_holding_lock = "deny"
+disallowed_types = "deny"
+
+[profile.release]
+lto = "thin"
