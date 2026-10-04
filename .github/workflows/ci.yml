@@ -1,0 +1,110 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - name: Fetch pinned upstream inputs
+        run: ./scripts/fetch-upstream.sh
+      - run: cargo fmt --check
+      - run: cargo clippy --all-targets -- -D warnings
+      - run: cargo test --all-targets
+      - run: cargo test --doc --workspace
+      - run: cargo doc --no-deps
+        env:
+          RUSTDOCFLAGS: -D missing_docs -D broken_intra_doc_links
+      - run: cargo build --release
+      - name: Committed pack is reproducible from pinned inputs
+        run: |
+          ./target/release/roadshield import
+          git diff --exit-code -- packs/
+
+  wasm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo install wasm-pack --locked
+      - run: wasm-pack build crates/roadshield-wasm --release --target nodejs --out-dir ../../target/wasm-node
+      - name: WASM output matches native
+        run: |
+          cargo build --release -p roadshield-cli
+          node examples/wasm/render.mjs packs/americana US:I 287 > wasm.svg
+          ./target/release/roadshield render --network US:I --ref 287 > native.svg
+          cmp wasm.svg native.svg
+
+  oracle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: cargo install wasm-pack --locked
+      - name: Fetch and build pinned upstream; check rules provenance
+        run: |
+          ./scripts/fetch-upstream.sh
+          ./oracle/prepare-upstream.sh
+      - run: wasm-pack build crates/roadshield-wasm --release --target web --out-dir ../../target/wasm-web
+      - name: Install Chromium
+        working-directory: .upstream/openstreetmap-americana
+        run: npx playwright install --with-deps chromium
+      - name: Sweep every network against the upstream renderer
+        run: |
+          node oracle/sweep.mjs --dpr 1
+          node oracle/sweep.mjs --dpr 2
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oracle-sweep
+          path: target/oracle/
+
+  pack-artifacts:
+    needs: gate
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo build --release -p roadshield-cli
+      - name: Versioned pack archive
+        id: pack
+        run: |
+          hash=$(python3 -c "import json;print(json.load(open('packs/americana/manifest.json'))['content_hash'][:16])")
+          commit=$(python3 -c "import json;print(json.load(open('packs/americana/manifest.json'))['upstream']['commit'][:10])")
+          name="roadshield-pack-americana-${commit}-${hash}"
+          tar -C packs -czf "$name.tar.gz" americana
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+      - name: Prewarm popular symbols
+        run: |
+          ./target/release/roadshield batch --input packs/americana.prewarm.jsonl --out-dir prewarm --format both --dpr 2
+          tar -czf "${{ steps.pack.outputs.name }}-prewarm.tar.gz" prewarm
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.pack.outputs.name }}
+          path: |
+            ${{ steps.pack.outputs.name }}.tar.gz
+            ${{ steps.pack.outputs.name }}-prewarm.tar.gz

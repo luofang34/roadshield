@@ -98,10 +98,24 @@ unknown fields, or if a referenced blank is missing.
 cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test --all-targets
 ```
 
-Conformance tests compare against captures of the upstream TypeScript
-renderer in Chromium (`crates/roadshield-raster/tests/fixtures`): text
-metrics within 0.0005 px, identical image sizes, and pixels within
-anti-aliasing tolerance.
+Conformance against the upstream TypeScript renderer, at the pinned commit:
+
+```sh
+./scripts/fetch-upstream.sh
+./oracle/prepare-upstream.sh   # npm build of upstream; checks generated ShieldJSON == pack input
+wasm-pack build crates/roadshield-wasm --release --target web --out-dir ../../target/wasm-web
+node oracle/sweep.mjs --dpr 1 && node oracle/sweep.mjs --dpr 2   # reports in target/oracle/
+```
+
+The sweep opens upstream's `shieldtest.html` in Chromium and compares every
+network (about 14,000 cases) with roadshield's output at the same device
+pixel ratio: presence, exact image size, and pixels within anti-aliasing
+bounds. The 2x run is the geometric gate. A small offline fixture of the
+same comparison runs in `cargo test`.
+
+Set `DisplayContext::pixel_grid` to 2 when rasterising for DPR > 1, as
+MapLibre uses 2x sprites there; geometry is then rounded on the 2x grid as
+upstream does.
 
 ## Licences
 
@@ -109,3 +123,8 @@ roadshield is licensed under AGPL-3.0-or-later (`LICENSE`). Pack contents keep
 their own licences, listed in `packs/americana/manifest.json` with texts in
 `packs/americana/licenses/`: Americana rules and blanks are CC0-1.0; the Noto
 fonts are OFL-1.1.
+
+Fonts: Americana's Noto Sans Condensed Medium (proportional numerals) for
+Latin, Greek and Cyrillic, plus Noto Sans Armenian and Noto Sans Georgian
+Condensed Medium for route refs in those scripts. Text no font covers fails
+with `ShieldError::MissingGlyph` rather than drawing boxes.
