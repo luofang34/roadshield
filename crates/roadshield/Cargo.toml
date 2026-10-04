@@ -1,11 +1,17 @@
 [package]
 name = "roadshield"
 description = "Data-driven road shield generation compatible with OSM Americana ShieldJSON"
-publish = false
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme = "../../README.md"
+keywords = ["openstreetmap", "maplibre", "shields", "svg", "cartography"]
+categories = ["graphics", "rendering", "science::geo", "wasm"]
+# Integration tests load the repository's resource pack.
+exclude = ["tests/"]
 
 [dependencies]
 blake3.workspace = true

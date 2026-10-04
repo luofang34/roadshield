@@ -7,6 +7,8 @@ version = "0.1.0"
 edition = "2024"
 rust-version = "1.88"
 license = "AGPL-3.0-or-later"
+repository = "https://github.com/luofang34/roadshield"
+homepage = "https://github.com/luofang34/roadshield"
 
 [workspace.dependencies]
 roadshield = { path = "crates/roadshield" }
