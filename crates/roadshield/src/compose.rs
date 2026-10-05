@@ -11,7 +11,7 @@ use crate::error::{ShieldError, Warning};
 use crate::font::{FontStack, ShapedText};
 use crate::geometry::{Rect, num};
 use crate::model::{Padding, ShieldDef, ShieldOptions, TextLayoutDef};
-use crate::route::{DisplayContext, MissingGlyphPolicy};
+use crate::route::{DisplayContext, MissingGlyphPolicy, TextHaloJoin};
 use crate::select::{Selection, choose_blank, romanize};
 use crate::shapes::{self, ShapeEnv};
 use crate::svg;
@@ -134,11 +134,11 @@ impl ComposeEnv<'_> {
     }
 }
 
-fn halo_element(d: &str, color: Rgba, width: f64) -> String {
+fn halo_element(d: &str, color: Rgba, width: f64, join: TextHaloJoin) -> String {
     format!(
         "<path d=\"{d}\" fill=\"none\" {} {}/>",
         svg::stroke(color),
-        svg::stroke_style(width)
+        svg::halo_stroke_style(width, join)
     )
 }
 
@@ -146,8 +146,8 @@ fn fill_element(d: &str, color: Rgba) -> String {
     format!("<path d=\"{d}\" {}/>", svg::fill(color))
 }
 
-fn truthy(s: &Option<String>) -> Option<&str> {
-    s.as_deref().filter(|s| !s.is_empty())
+fn truthy(s: Option<&str>) -> Option<&str> {
+    s.filter(|s| !s.is_empty())
 }
 
 struct Body {
@@ -371,11 +371,16 @@ fn shield_text(
         let forced = env.ctx.accessibility.force_text_halo.as_deref();
         if let Some(h) = forced
             .filter(|s| !s.is_empty())
-            .or(truthy(&def.text_halo_color))
+            .or(truthy(def.text_halo_color.as_deref()))
         {
-            out.push_str(&halo_element(&d, env.color(h)?, 2.0 * env.r));
+            out.push_str(&halo_element(
+                &d,
+                env.color(h)?,
+                2.0 * env.r,
+                env.ctx.text_halo_join,
+            ));
         }
-        let fill = env.color(truthy(&def.text_color).unwrap_or("black"))?;
+        let fill = env.color(truthy(def.text_color.as_deref()).unwrap_or("black"))?;
         out.push_str(&fill_element(&d, fill));
     }
     Ok((out, info))
@@ -402,14 +407,20 @@ pub(crate) fn compose(env: &ComposeEnv<'_>, sel: &Selection) -> Result<Composed,
     };
     let mut used = TextUse::default();
     let (banner_paths, banner_infos) = banners(env, &texts, b.width, &mut used)?;
-    let banner_halo =
-        env.color(truthy(&def.banner_text_halo_color).unwrap_or(&opts.banner_text_halo_color))?;
+    let banner_halo = env.color(
+        truthy(def.banner_text_halo_color.as_deref()).unwrap_or(&opts.banner_text_halo_color),
+    )?;
     let banner_fill =
-        env.color(truthy(&def.banner_text_color).unwrap_or(&opts.banner_text_color))?;
+        env.color(truthy(def.banner_text_color.as_deref()).unwrap_or(&opts.banner_text_color))?;
 
     let mut out = String::new();
     for d in banner_paths.iter().filter(|d| !d.is_empty()) {
-        out.push_str(&halo_element(d, banner_halo, 2.0 * env.r));
+        out.push_str(&halo_element(
+            d,
+            banner_halo,
+            2.0 * env.r,
+            env.ctx.text_halo_join,
+        ));
     }
     out.push_str(&format!(
         "<g transform=\"translate(0 {})\">",
