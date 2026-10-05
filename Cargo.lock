@@ -611,7 +611,7 @@ dependencies = [
 
 [[package]]
 name = "roadshield"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "blake3",
  "csscolorparser",
@@ -628,7 +628,7 @@ dependencies = [
 
 [[package]]
 name = "roadshield-cli"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -643,7 +643,7 @@ dependencies = [
 
 [[package]]
 name = "roadshield-import"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "blake3",
  "indexmap",
@@ -659,7 +659,7 @@ dependencies = [
 
 [[package]]
 name = "roadshield-raster"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "blake3",
  "resvg",
@@ -674,7 +674,7 @@ dependencies = [
 
 [[package]]
 name = "roadshield-wasm"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "roadshield",
  "roadshield-raster",
