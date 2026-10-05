@@ -27,6 +27,9 @@ const { values: opt } = parseArgs({
     dpr: { type: "string", default: "1" },
     out: { type: "string", default: "target/oracle" },
     limit: { type: "string", default: "0" },
+    // Also compare the pack's extension networks: only meaningful when the
+    // upstream build includes them (the contribution draft).
+    "include-extensions": { type: "boolean", default: false },
     "mean-max": { type: "string" },
     "frac-max": { type: "string" },
   },
@@ -118,7 +121,7 @@ await page.goto(`${origin}/upstream/shieldtest.html`, { waitUntil: "load" });
 await page.waitForFunction(() => window.map && window.map.loaded());
 
 const result = await page.evaluate(
-  async ({ dpr, limit, meanMax, fracMax }) => {
+  async ({ dpr, limit, meanMax, fracMax, includeExtensions }) => {
     const stack = '"Noto Sans Condensed", "Noto Sans Armenian Condensed", sans-serif-condensed, "Arial Narrow", sans-serif';
     await document.fonts.load(`condensed 500 12px ${stack}`);
     await document.fonts.ready;
@@ -145,6 +148,7 @@ const result = await page.evaluate(
       throw new Error(`canvas text is not using the pinned webfont: "287" measures ${pageWidth}px, expected ${ourWidth}px`);
     }
     const rules = JSON.parse(shields.rules()).networks;
+    const extensions = new Set(JSON.parse(shields.extensionNetworks()));
 
     const cases = [];
     const seen = new Set();
@@ -156,7 +160,7 @@ const result = await page.evaluate(
       }
     };
     for (const [network, def] of Object.entries(rules)) {
-      if (!def) continue;
+      if (!def || (extensions.has(network) && !includeExtensions)) continue;
       for (const r of ["1", "22", "287", "1234", "I-5", "10A"]) add(network, r, "");
       add(network, "", "");
       for (const r of Object.keys(def.overrideByRef ?? {})) add(network, r, "");
@@ -179,7 +183,7 @@ const result = await page.evaluate(
     };
 
     const failures = [];
-    const stats = { cases: todo.length, compared: 0, both_none: 0, worst_mean: 0, worst_frac: 0 };
+    const stats = { cases: todo.length, compared: 0, both_none: 0, worst_mean: 0, worst_frac: 0, extensions: [...extensions].filter((n) => includeExtensions) };
     for (const c of todo) {
       const id = `shield\n${c.network}\n${c.ref}\n${c.name}\n`;
       map.fire(new maplibregl.Event("styleimagemissing", { id }));
@@ -250,7 +254,7 @@ const result = await page.evaluate(
     }
     return { stats, failures };
   },
-  { dpr: Number(opt.dpr), limit: Number(opt.limit), meanMax, fracMax },
+  { dpr: Number(opt.dpr), limit: Number(opt.limit), meanMax, fracMax, includeExtensions: opt["include-extensions"] },
 );
 
 await browser.close();

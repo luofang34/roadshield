@@ -7,7 +7,9 @@
 
 use std::collections::{BTreeSet, HashMap};
 
-use roadshield::{MANIFEST_PATH, Manifest, ResourcePack, ShieldDef, ShieldSpec, Subset};
+use roadshield::{
+    ExtensionSpec, MANIFEST_PATH, Manifest, ResourcePack, ShieldDef, ShieldSpec, Subset,
+};
 
 use crate::error::ImportError;
 
@@ -53,6 +55,49 @@ fn file_ref(path: &str, bytes: &[u8]) -> roadshield::FileRef {
     }
 }
 
+fn load_extension<S: std::hash::BuildHasher>(
+    parent: &HashMap<String, Vec<u8>, S>,
+    manifest: &Manifest,
+) -> Result<Option<ExtensionSpec>, ImportError> {
+    let Some(file) = &manifest.extension_rules else {
+        return Ok(None);
+    };
+    let bytes = parent
+        .get(&file.path)
+        .ok_or_else(|| ImportError::Subset(format!("{} missing", file.path)))?;
+    serde_json::from_slice(bytes)
+        .map(Some)
+        .map_err(|e| ImportError::Subset(e.to_string()))
+}
+
+/// The parent's extension networks the request keeps, if any.
+fn subset_extension<S: std::hash::BuildHasher>(
+    parent: &HashMap<String, Vec<u8>, S>,
+    manifest: &Manifest,
+    req: &SubsetRequest,
+) -> Result<Option<ExtensionSpec>, ImportError> {
+    let mut extension = load_extension(parent, manifest)?;
+    if let Some(ext) = &mut extension {
+        ext.networks.retain(|k, _| matches(k, &req.networks));
+    }
+    Ok(extension.filter(|e| !e.networks.is_empty()))
+}
+
+/// Writes the kept extension networks and returns their file entry.
+fn extension_file(
+    extension: Option<&ExtensionSpec>,
+    manifest: &Manifest,
+    out: &mut HashMap<String, Vec<u8>>,
+) -> Result<Option<roadshield::FileRef>, ImportError> {
+    let (Some(ext), Some(file)) = (extension, &manifest.extension_rules) else {
+        return Ok(None);
+    };
+    let bytes = serde_json::to_vec(ext).map_err(|e| ImportError::Subset(e.to_string()))?;
+    let r = file_ref(&file.path, &bytes);
+    out.insert(r.path.clone(), bytes);
+    Ok(Some(r))
+}
+
 /// Cuts a subset from a full pack's files, returning the new pack's files
 /// (manifest included). The result is verified by loading it.
 ///
@@ -83,7 +128,11 @@ pub fn cut_subset<S: std::hash::BuildHasher>(
             req.networks
         )));
     }
+    let extension = subset_extension(parent, &full.manifest, req)?;
     let mut kept = spec.clone();
+    if let Some(ext) = &extension {
+        kept.networks.extend(ext.networks.clone());
+    }
     kept.expand_banner_maps();
     let kept_keys: BTreeSet<&String> = kept.networks.keys().collect();
     let excluded: Vec<String> = full
@@ -94,7 +143,7 @@ pub fn cut_subset<S: std::hash::BuildHasher>(
         .cloned()
         .collect();
     let mut blank_ids = BTreeSet::new();
-    for def in spec.networks.values().flatten() {
+    for def in kept.networks.values().flatten() {
         blanks_of(def, &mut blank_ids);
     }
     let rules_bytes = serde_json::to_vec(&spec).map_err(|e| ImportError::Subset(e.to_string()))?;
@@ -103,6 +152,7 @@ pub fn cut_subset<S: std::hash::BuildHasher>(
     manifest.rules = file_ref(&manifest.rules.path, &rules_bytes);
     out.insert(manifest.rules.path.clone(), rules_bytes);
     manifest.blanks.retain(|b| blank_ids.contains(&b.id));
+    manifest.extension_rules = extension_file(extension.as_ref(), &full.manifest, &mut out)?;
     let mut copy = |path: &str| -> Result<(), ImportError> {
         let bytes = parent
             .get(path)

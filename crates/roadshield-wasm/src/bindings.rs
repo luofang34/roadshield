@@ -63,6 +63,22 @@ impl RoadShield {
         serde_json::to_string(&keys).map_err(js_err)
     }
 
+    /// Network keys the pack's extension rules define (no upstream oracle
+    /// exists for them unless upstream adopts them), as JSON.
+    ///
+    /// # Errors
+    ///
+    /// Throws if no pack is loaded.
+    #[wasm_bindgen(js_name = extensionNetworks)]
+    pub fn extension_networks(&self) -> Result<String, JsValue> {
+        let engine = self.engine()?;
+        let keys: Vec<&str> = engine
+            .networks()
+            .filter(|n| engine.rule_origin(n) == Some(roadshield::RuleOrigin::Extension))
+            .collect();
+        serde_json::to_string(&keys).map_err(js_err)
+    }
+
     /// The expanded rules (`ShieldSpec`) as JSON.
     ///
     /// # Errors

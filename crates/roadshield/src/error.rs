@@ -165,6 +165,13 @@ pub enum PackError {
         /// Failure detail.
         detail: String,
     },
+    /// Extension rules redefine networks the upstream rules already define.
+    /// Upstream adopted them: remove or reconcile the extension.
+    #[error("extension rules redefine upstream networks: {}", networks.join(", "))]
+    ExtensionConflict {
+        /// Networks both define.
+        networks: Vec<String>,
+    },
     /// A resource exceeds a size limit.
     #[error("{path:?} is {size} bytes, over the {limit} byte limit")]
     TooLarge {

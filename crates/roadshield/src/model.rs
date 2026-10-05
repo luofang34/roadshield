@@ -252,16 +252,31 @@ impl ShieldSpec {
     /// Iterates a snapshot of the original entries, so a definition that is
     /// overwritten by an earlier expansion still expands its own map.
     pub fn expand_banner_maps(&mut self) {
-        let snapshot: Vec<ShieldDef> = self.networks.values().flatten().cloned().collect();
-        for def in snapshot {
-            let Some(map) = &def.banner_map else { continue };
-            for (key, banners) in map {
-                let mut variant = def.clone();
-                variant.banners = Some(banners.clone());
-                self.networks.insert(key.clone(), Some(variant));
-            }
+        expand_banner_maps(&mut self.networks);
+    }
+}
+
+/// Expands `bannerMap`s within one network map (see
+/// [`ShieldSpec::expand_banner_maps`]).
+pub fn expand_banner_maps(networks: &mut IndexMap<String, Option<ShieldDef>>) {
+    let snapshot: Vec<ShieldDef> = networks.values().flatten().cloned().collect();
+    for def in snapshot {
+        let Some(map) = &def.banner_map else { continue };
+        for (key, banners) in map {
+            let mut variant = def.clone();
+            variant.banners = Some(banners.clone());
+            networks.insert(key.clone(), Some(variant));
         }
     }
+}
+
+/// Networks a pack adds beyond its upstream rules, in `ShieldJSON` form
+/// without global options. Extensions may not redefine an upstream network.
+#[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ExtensionSpec {
+    /// Network key → shield definition.
+    pub networks: IndexMap<String, Option<ShieldDef>>,
 }
 
 #[cfg(test)]

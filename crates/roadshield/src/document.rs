@@ -2,6 +2,7 @@
 
 use crate::compose::Composed;
 use crate::error::Warning;
+use crate::extension::RuleOrigin;
 use crate::geometry::{Rect, num};
 use crate::route::DisplayContext;
 use crate::select::Selection;
@@ -55,6 +56,7 @@ pub(crate) struct Extras {
     pub dependencies: Vec<Dependency>,
     pub semantic_key: String,
     pub warnings: Vec<Warning>,
+    pub origin: RuleOrigin,
 }
 
 /// Builds the public symbol; `s` converts composed (device) units to
@@ -84,6 +86,7 @@ pub(crate) fn symbol(c: Composed, sel: Selection, s: f64, extras: Extras) -> Shi
             overrides: sel.overrides,
             blank: c.blank,
             shape: c.shape,
+            origin: extras.origin,
         },
         provenance: extras.provenance,
         dependencies: extras.dependencies,

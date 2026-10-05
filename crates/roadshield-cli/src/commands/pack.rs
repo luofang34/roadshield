@@ -22,6 +22,7 @@ pub fn import(m: &ArgMatches) -> Result<()> {
         checkout: &checkout,
         inputs: &inputs,
         out_dir: &out,
+        config_dir: config_path.parent().unwrap_or(std::path::Path::new(".")),
     })?;
     for (cat, names) in &report.inventory.stale {
         tracing::warn!(

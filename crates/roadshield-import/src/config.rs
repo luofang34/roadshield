@@ -71,6 +71,21 @@ pub struct FontInput {
     pub license: FontLicense,
 }
 
+/// Extension rules maintained in this repository: networks the pack adds
+/// beyond upstream. Their data must stay CC0 so it can be contributed
+/// upstream.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ExtensionInput {
+    /// `ExtensionSpec` JSON, relative to the import config's directory.
+    pub file: String,
+    /// SPDX licence ID of the extension data (the licence text is taken from
+    /// the upstream checkout's licence of the same ID).
+    pub license: String,
+    /// Attribution notice.
+    pub attribution: String,
+}
+
 /// Whole import configuration.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -93,4 +108,7 @@ pub struct ImportConfig {
     pub font_stack: Vec<String>,
     /// Upstream engine sources to pin by hash.
     pub engine_sources: Vec<String>,
+    /// Networks added beyond upstream.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub extensions: Option<ExtensionInput>,
 }

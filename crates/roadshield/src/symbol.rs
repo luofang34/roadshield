@@ -3,6 +3,7 @@
 use serde::Serialize;
 
 use crate::error::{NoShieldReason, Warning};
+use crate::extension::RuleOrigin;
 use crate::geometry::Rect;
 use crate::select::AppliedOverride;
 
@@ -99,6 +100,8 @@ pub struct RuleInfo {
     pub blank: Option<String>,
     /// Shape drawn, if any.
     pub shape: Option<String>,
+    /// Whether the rule is upstream's or one of the pack's extensions.
+    pub origin: RuleOrigin,
 }
 
 /// Versions used to produce a symbol.

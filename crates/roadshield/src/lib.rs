@@ -22,6 +22,7 @@ mod compose;
 mod document;
 mod engine;
 mod error;
+mod extension;
 mod font;
 mod geometry;
 mod key;
@@ -40,11 +41,12 @@ mod validate;
 pub use color::{Recolor, Rgba};
 pub use engine::{Engine, TextMetrics};
 pub use error::{NoShieldReason, PackError, ShieldError, Warning};
+pub use extension::RuleOrigin;
 pub use geometry::Rect;
 pub use key::{ENGINE_OUTPUT_VERSION, semantic_key};
 pub use model::{
-    Padding, ShapeBlank, ShapeParams, ShieldDef, ShieldOptions, ShieldSpec, SpriteBlank,
-    TextLayoutDef, TextLayoutOptions,
+    ExtensionSpec, Padding, ShapeBlank, ShapeParams, ShieldDef, ShieldOptions, ShieldSpec,
+    SpriteBlank, TextLayoutDef, TextLayoutOptions,
 };
 pub use pack::{
     BlankEntry, FileRef, FontEntry, LicenseEntry, MANIFEST_FORMAT, MANIFEST_PATH, Manifest,
