@@ -198,6 +198,17 @@ fn inspect_cmd() -> Command {
         )
 }
 
+fn upstream_check_cmd() -> Command {
+    Command::new("upstream-check")
+        .about("Check a newer upstream checkout against the engine and the pack's extensions")
+        .arg(path_arg("config", "Import config JSON").default_value("packs/americana.import.json"))
+        .arg(path_arg("checkout", "Upstream checkout to check").required(true))
+        .arg(path_arg("rules", "ShieldJSON generated from that checkout").required(true))
+        .arg(path_arg("inputs", "Pinned input files").default_value("packs/americana.inputs"))
+        .arg(path_arg("json", "Write the result as JSON"))
+        .arg(path_arg("report", "Write a markdown report"))
+}
+
 fn bench_cmd() -> Command {
     Command::new("bench")
         .about("Measure cold/hot render latency and batch throughput")
@@ -224,6 +235,7 @@ pub fn command() -> Command {
             diff_cmd(),
             inspect_cmd(),
             bench_cmd(),
+            upstream_check_cmd(),
         ])
 }
 

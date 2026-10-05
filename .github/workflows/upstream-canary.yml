@@ -1,0 +1,63 @@
+name: upstream-canary
+
+# Weekly check of OpenStreetMap Americana's latest main against the engine
+# and the pack's extensions. Opens (or updates) an issue when upstream has
+# changed, so every upstream change becomes reviewable work: an update to
+# import, semantics to port, or extensions upstream has adopted.
+on:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check out upstream main
+        run: UPSTREAM_REF=main ./scripts/fetch-upstream.sh
+      - name: Generate upstream ShieldJSON
+        working-directory: .upstream/openstreetmap-americana
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          (cd shieldlib && node scripts/build.js)
+          npx tsx scripts/generate_shield_defs.ts -o shields.json
+          echo "UPSTREAM_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+      - run: cargo build --release -p roadshield-cli
+      - name: Check against engine and extensions
+        id: check
+        run: |
+          set +e
+          ./target/release/roadshield upstream-check \
+            --checkout .upstream/openstreetmap-americana \
+            --rules .upstream/openstreetmap-americana/shields.json \
+            --json check.json --report report.md
+          echo "status=$(jq -r .status check.json)" >> "$GITHUB_OUTPUT"
+          cat report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Open or update the tracking issue
+        if: steps.check.outputs.status != 'current'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STATUS: ${{ steps.check.outputs.status }}
+        run: |
+          title="Americana upstream check: $STATUS"
+          { echo "Upstream commit: \`$UPSTREAM_COMMIT\`"; echo; cat report.md; } > body.md
+          existing=$(gh issue list --state open --search "in:title \"Americana upstream check\"" --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --title "$title"
+            gh issue comment "$existing" --body-file body.md
+          else
+            gh issue create --title "$title" --body-file body.md
+          fi
+      - name: Fail when adaptation is required
+        if: steps.check.outputs.status == 'incompatible'
+        run: exit 1

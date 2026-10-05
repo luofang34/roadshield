@@ -29,12 +29,17 @@ print("downloads=" + shlex.quote("\n".join(i["url"] + " " + i["file"] for i in i
 PY
 )"
 
+# UPSTREAM_REF checks out another ref (e.g. main) instead of the pin, for
+# the scheduled upstream check.
+if [ -n "${UPSTREAM_REF:-}" ]; then
+  commit="$UPSTREAM_REF"
+fi
 checkout="$dest/$(basename "$repo")"
 if [ ! -d "$checkout/.git" ]; then
   git clone --quiet --filter=blob:none --no-checkout "$repo" "$checkout"
 fi
 git -C "$checkout" fetch --quiet origin "$commit"
-git -C "$checkout" -c advice.detachedHead=false checkout --quiet "$commit"
+git -C "$checkout" -c advice.detachedHead=false checkout --quiet FETCH_HEAD
 
 if [ "$refresh" = yes ]; then
   mkdir -p "$inputs"

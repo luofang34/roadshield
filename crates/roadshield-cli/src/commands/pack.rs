@@ -3,9 +3,9 @@
 use anyhow::{Context as _, Result};
 use clap::ArgMatches;
 use roadshield_import::{
-    BuildRequest, ImportConfig, SubsetRequest, build_pack_blocking, cut_subset, diff_packs,
-    load_engine_blocking, load_pack_dir_blocking, read_blocking, visual_report_html,
-    write_blocking,
+    BuildRequest, CheckRequest, CheckStatus, ImportConfig, SubsetRequest, build_pack_blocking,
+    cut_subset, diff_packs, load_engine_blocking, load_pack_dir_blocking, read_blocking,
+    upstream_check_blocking, visual_report_html, write_blocking,
 };
 use serde_json::json;
 
@@ -102,4 +102,35 @@ pub fn inspect(m: &ArgMatches) -> Result<()> {
         summary["network_keys"] = json!(engine.networks().collect::<Vec<_>>());
     }
     print_json(&summary)
+}
+
+/// Checks a newer upstream checkout; fails when the engine or the
+/// extensions must adapt.
+pub fn upstream_check(m: &ArgMatches) -> Result<()> {
+    let config_path = path(m, "config")?;
+    let config: ImportConfig = serde_json::from_slice(&read_blocking(&config_path)?)
+        .with_context(|| format!("parsing {}", config_path.display()))?;
+    let pinned = read_blocking(&path(m, "inputs")?.join(&config.rules.file)).ok();
+    let (checkout, rules) = (path(m, "checkout")?, path(m, "rules")?);
+    let check = upstream_check_blocking(
+        &CheckRequest {
+            config: &config,
+            config_dir: config_path.parent().unwrap_or(std::path::Path::new(".")),
+            checkout: &checkout,
+            rules: &rules,
+        },
+        pinned.as_deref(),
+    )?;
+    let report = check.to_markdown();
+    if let Some(p) = m.get_one::<std::path::PathBuf>("report") {
+        write_blocking(p, report.as_bytes())?;
+    }
+    if let Some(p) = m.get_one::<std::path::PathBuf>("json") {
+        write_blocking(p, &serde_json::to_vec_pretty(&check)?)?;
+    }
+    write_out(None, report.as_bytes())?;
+    if check.status == CheckStatus::Incompatible {
+        anyhow::bail!("upstream is incompatible with the engine or the pack's extensions");
+    }
+    Ok(())
 }

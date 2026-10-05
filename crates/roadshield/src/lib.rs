@@ -62,4 +62,4 @@ pub use symbol::{
     Dependency, DependencyKind, Provenance, Rendering, RuleInfo, ShieldSymbol, TextInfo,
 };
 pub use text_layout::CONSTRAINTS;
-pub use validate::{IssueKind, RuleIssue};
+pub use validate::{IssueKind, RuleIssue, validate_rules};
