@@ -47,6 +47,11 @@ pub struct Engine {
 
 impl Engine {
     /// Prepares fonts and blanks from a verified pack.
+    ///
+    /// # Errors
+    ///
+    /// Fails with [`PackError`] when a listed blank or font is missing, a blank
+    /// is not a valid SVG within limits, or a font cannot be parsed.
     pub fn new(pack: ResourcePack) -> Result<Self, PackError> {
         let mut blanks = HashMap::new();
         let mut blank_hashes = HashMap::new();
@@ -99,11 +104,13 @@ impl Engine {
     }
 
     /// The pack manifest.
+    #[must_use]
     pub fn manifest(&self) -> &Manifest {
         &self.manifest
     }
 
     /// Rules with `bannerMap` expanded.
+    #[must_use]
     pub fn rules(&self) -> &crate::model::ShieldSpec {
         &self.rules
     }
@@ -114,11 +121,13 @@ impl Engine {
     }
 
     /// Every rule problem in the pack.
+    #[must_use]
     pub fn validate(&self) -> Vec<RuleIssue> {
         validate(&self.rules, &self.blanks)
     }
 
     /// Semantic cache key for a request, without rendering.
+    #[must_use]
     pub fn semantic_key(&self, route: &RouteDescriptor, ctx: &DisplayContext) -> String {
         // An explicit copy of the default stack renders identically to none.
         if ctx.font_stack.as_ref() == Some(&self.manifest.font_stack) {
@@ -178,6 +187,12 @@ impl Engine {
     /// Canvas `measureText` quantities for `text` at `font_px` with
     /// `textAlign = "left"` and `textBaseline = "top"`, as the engine models
     /// them. Exposed for conformance checks against a browser.
+    ///
+    /// # Errors
+    ///
+    /// Fails with [`ShieldError::InvalidInput`] for an unknown font ID in the
+    /// context and [`ShieldError::MissingGlyph`] when no font covers a character
+    /// under the context's missing-glyph policy.
     pub fn measure_text(
         &self,
         text: &str,
@@ -283,6 +298,14 @@ impl Engine {
     }
 
     /// Renders the shield for `route`.
+    ///
+    /// # Errors
+    ///
+    /// Returns a [`ShieldError`] for out-of-bounds input, a pack or theme the
+    /// context does not accept, a network excluded from a subset pack, an unknown
+    /// network under [`UnknownNetworkPolicy::Unsupported`], a missing blank or
+    /// glyph, an unsupported rule, or text that cannot be fitted. Rules that
+    /// decline to draw are not errors: they return [`Rendering::NoShield`].
     pub fn render(
         &self,
         route: &RouteDescriptor,

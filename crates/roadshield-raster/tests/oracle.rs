@@ -155,7 +155,7 @@ fn sizes_and_pixels_match_the_upstream_renderer() {
                 big += 1;
             }
         }
-        let n = (ours.width * ours.height) as f64;
+        let n = f64::from(ours.width * ours.height);
         let mean = sum as f64 / n;
         let frac = big as f64 / n;
         // Sizes and text metrics are asserted exactly above; pixels differ

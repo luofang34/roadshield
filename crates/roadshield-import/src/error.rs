@@ -36,7 +36,7 @@ pub enum ImportError {
         /// Checked-out commit.
         actual: String,
     },
-    /// JSON parse or schema failure (includes unknown ShieldJSON fields).
+    /// JSON parse or schema failure (includes unknown `ShieldJSON` fields).
     #[error("{path} is not valid: {detail}")]
     Json {
         /// File path.

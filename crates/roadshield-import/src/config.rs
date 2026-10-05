@@ -81,7 +81,7 @@ pub struct ImportConfig {
     pub themes: Vec<String>,
     /// Upstream repository pin.
     pub upstream: UpstreamPin,
-    /// ShieldJSON input.
+    /// `ShieldJSON` input.
     pub rules: PinnedInput,
     /// Sprite sheet layout (1x) used to cross-check blank sizes.
     pub sprite_sizes: PinnedInput,

@@ -3,7 +3,7 @@ use super::*;
 #[test]
 fn numbers_are_compact_and_stable() {
     assert_eq!(num(1.0), "1");
-    assert_eq!(num(0.123456), "0.1235");
+    assert_eq!(num(0.123_456), "0.1235");
     assert_eq!(num(-0.00001), "0");
     assert_eq!(num(f64::NAN), "0");
     assert_eq!(num(12.5), "12.5");

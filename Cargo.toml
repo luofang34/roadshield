@@ -30,9 +30,29 @@ resvg = { version = "0.48", default-features = false }
 
 [workspace.lints.rust]
 unsafe_code = "forbid"
-missing_docs = "warn"
+missing_docs = "forbid"
 
 [workspace.lints.clippy]
+# Every default clippy group (correctness, suspicious, style, complexity,
+# perf) is an error regardless of command-line flags.
+all = { level = "deny", priority = -1 }
+# Pedantic lints the code base is clean of; keep it that way.
+cast_lossless = "deny"
+default_trait_access = "deny"
+doc_markdown = "deny"
+format_collect = "deny"
+implicit_hasher = "deny"
+map_unwrap_or = "deny"
+missing_errors_doc = "deny"
+missing_fields_in_debug = "deny"
+must_use_candidate = "deny"
+ref_option = "deny"
+return_self_not_must_use = "deny"
+semicolon_if_nothing_returned = "deny"
+single_match_else = "deny"
+uninlined_format_args = "deny"
+unreadable_literal = "deny"
+unused_self = "deny"
 unwrap_used = "forbid"
 expect_used = "forbid"
 panic = "forbid"

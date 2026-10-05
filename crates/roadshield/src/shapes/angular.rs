@@ -39,7 +39,7 @@ pub(super) fn triangle(env: &ShapeEnv<'_>, p: &ShapeParams) -> Result<DrawOp, cr
     path.arc_to(x8, y2, x7, y3, r);
     path.arc_to(x5, y5, x4, y5, r);
     path.close();
-    Ok(op(path, &s))
+    Ok(op(&path, &s))
 }
 
 pub(super) fn trapezoid(env: &ShapeEnv<'_>, p: &ShapeParams) -> Result<DrawOp, crate::ShieldError> {
@@ -70,7 +70,7 @@ pub(super) fn trapezoid(env: &ShapeEnv<'_>, p: &ShapeParams) -> Result<DrawOp, c
     path.arc_to(x4, y3, x1, y1, r);
     path.arc_to(x0, y0, x8, y0, r);
     path.close();
-    Ok(op(path, &s))
+    Ok(op(&path, &s))
 }
 
 pub(super) fn diamond(env: &ShapeEnv<'_>, p: &ShapeParams) -> Result<DrawOp, crate::ShieldError> {
@@ -109,7 +109,7 @@ pub(super) fn diamond(env: &ShapeEnv<'_>, p: &ShapeParams) -> Result<DrawOp, cra
     path.arc_to(x8, y5, x6, y7, r);
     path.arc_to(x5, y8, x4, y8, r);
     path.close();
-    Ok(op(path, &s))
+    Ok(op(&path, &s))
 }
 
 pub(super) fn pentagon(env: &ShapeEnv<'_>, p: &ShapeParams) -> Result<DrawOp, crate::ShieldError> {
@@ -147,7 +147,7 @@ pub(super) fn pentagon(env: &ShapeEnv<'_>, p: &ShapeParams) -> Result<DrawOp, cr
     path.arc_to(x6, y0, x7, y1, r2);
     path.arc_to(x8, y2, x4, y3, r1);
     path.close();
-    Ok(op(path, &s))
+    Ok(op(&path, &s))
 }
 
 pub(super) fn hexagon_vertical(
@@ -175,7 +175,7 @@ pub(super) fn hexagon_vertical(
     path.arc_to(x2, y4, x1, y5, r);
     path.line_to(x1, y5);
     path.close();
-    Ok(op(path, &s))
+    Ok(op(&path, &s))
 }
 
 pub(super) fn hexagon_horizontal(
@@ -213,7 +213,7 @@ pub(super) fn hexagon_horizontal(
     path.arc_to(x0, y3, x1, y2, r);
     path.arc_to(x3, y0, x4, y0, r);
     path.close();
-    Ok(op(path, &s))
+    Ok(op(&path, &s))
 }
 
 pub(super) fn octagon_vertical(
@@ -264,5 +264,5 @@ pub(super) fn octagon_vertical(
     path.arc_to(x7, y8, x6, y9, r);
     path.line_to(x5, y10);
     path.close();
-    Ok(op(path, &s))
+    Ok(op(&path, &s))
 }

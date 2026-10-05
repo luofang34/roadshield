@@ -291,6 +291,14 @@ fn hash_engine_sources(req: &BuildRequest<'_>) -> Result<Vec<UpstreamFile>, Impo
 
 /// Verifies every input, builds the pack, writes it and reloads it through
 /// the engine. Fails on any unimplemented upstream semantics.
+///
+/// # Errors
+///
+/// Fails with [`ImportError`] when the checkout is not at the pinned commit,
+/// an input is missing or does not match its SHA-256, the source inventory or
+/// rules use semantics the engine does not implement, a referenced blank is
+/// missing or mis-sized, a font cannot be decoded, or the pack cannot be
+/// written.
 pub fn build_pack_blocking(req: &BuildRequest<'_>) -> Result<BuildReport, ImportError> {
     let c = req.config;
     let commit = checkout_commit_blocking(req.checkout)?;

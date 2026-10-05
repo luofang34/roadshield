@@ -23,7 +23,7 @@ pub trait ResourceResolver {
     fn read(&self, path: &str) -> Option<Vec<u8>>;
 }
 
-impl ResourceResolver for HashMap<String, Vec<u8>> {
+impl<S: std::hash::BuildHasher> ResourceResolver for HashMap<String, Vec<u8>, S> {
     fn read(&self, path: &str) -> Option<Vec<u8>> {
         self.get(path).cloned()
     }
@@ -105,7 +105,7 @@ pub struct Upstream {
     pub repository: String,
     /// Pinned commit.
     pub commit: String,
-    /// Where the ShieldJSON came from.
+    /// Where the `ShieldJSON` came from.
     pub rules_source: SourceRef,
     /// SHA-256 of the upstream engine sources this port mirrors, so pack
     /// diffs flag upstream logic changes that need porting.
@@ -144,7 +144,7 @@ pub struct Manifest {
     pub content_hash: String,
     /// Upstream provenance.
     pub upstream: Upstream,
-    /// ShieldJSON file.
+    /// `ShieldJSON` file.
     pub rules: FileRef,
     /// Blank SVGs.
     pub blanks: Vec<BlankEntry>,
@@ -163,6 +163,10 @@ pub struct Manifest {
 impl Manifest {
     /// Computes the content hash (manifest serialised with an empty
     /// `content_hash`).
+    ///
+    /// # Errors
+    ///
+    /// Fails with [`PackError::Manifest`] if the manifest cannot be serialised.
     pub fn compute_content_hash(&self) -> Result<String, PackError> {
         let mut m = self.clone();
         m.content_hash = String::new();
@@ -173,6 +177,7 @@ impl Manifest {
     }
 
     /// Every file the manifest lists.
+    #[must_use]
     pub fn files(&self) -> Vec<&FileRef> {
         let mut out = vec![&self.rules];
         out.extend(self.blanks.iter().map(|b| &b.file));
@@ -222,6 +227,13 @@ fn read_verified(resolver: &dyn ResourceResolver, f: &FileRef) -> Result<Vec<u8>
 impl ResourcePack {
     /// Loads and verifies a pack. Every listed file must be present and
     /// match its hash; the manifest must match its content hash.
+    ///
+    /// # Errors
+    ///
+    /// Fails with [`PackError`] when the manifest or a listed file is missing,
+    /// oversized or does not match its hash, the manifest format is unknown or
+    /// inconsistent, or the rules are not valid `ShieldJSON` (including unknown
+    /// fields).
     pub fn load(resolver: &dyn ResourceResolver) -> Result<Self, PackError> {
         let raw = resolver
             .read(MANIFEST_PATH)

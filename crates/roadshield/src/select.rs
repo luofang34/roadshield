@@ -51,6 +51,7 @@ pub fn utf16_len(s: &str) -> usize {
 }
 
 /// `isValidRef`: non-empty and at most [`MAX_REF_UTF16`] code units.
+#[must_use]
 pub fn is_valid_ref(r: &str) -> bool {
     let n = utf16_len(r);
     n != 0 && n <= MAX_REF_UTF16

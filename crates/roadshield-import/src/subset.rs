@@ -55,8 +55,14 @@ fn file_ref(path: &str, bytes: &[u8]) -> roadshield::FileRef {
 
 /// Cuts a subset from a full pack's files, returning the new pack's files
 /// (manifest included). The result is verified by loading it.
-pub fn cut_subset(
-    parent: &HashMap<String, Vec<u8>>,
+///
+/// # Errors
+///
+/// Fails with [`ImportError::Subset`] for a parent that is itself a subset,
+/// missing files or a request that matches no network, and with
+/// [`ImportError::Pack`] if the parent or the result does not verify.
+pub fn cut_subset<S: std::hash::BuildHasher>(
+    parent: &HashMap<String, Vec<u8>, S>,
     req: &SubsetRequest,
 ) -> Result<HashMap<String, Vec<u8>>, ImportError> {
     let full = ResourcePack::load(parent)?;

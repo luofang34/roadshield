@@ -80,6 +80,7 @@ pub enum RasterError {
 }
 
 /// Raster cache key: the semantic key plus every raster parameter.
+#[must_use]
 pub fn raster_key(semantic_key: &str, opts: &RasterOptions) -> String {
     let alpha = match opts.alpha {
         AlphaMode::Premultiplied => "pm",
@@ -96,6 +97,12 @@ fn device_size(logical: f64, ratio: f32) -> u32 {
 }
 
 /// Renders `symbol` at `opts.pixel_ratio`.
+///
+/// # Errors
+///
+/// Fails with [`RasterError::Options`] for a pixel ratio outside `(0, 8]`,
+/// [`RasterError::TooLarge`] when the image would exceed `max_pixels`, and
+/// [`RasterError::Parse`] if the symbol's SVG does not parse.
 pub fn rasterize(symbol: &ShieldSymbol, opts: &RasterOptions) -> Result<RasterImage, RasterError> {
     if !(opts.pixel_ratio.is_finite() && opts.pixel_ratio > 0.0 && opts.pixel_ratio <= 8.0) {
         return Err(RasterError::Options(format!(
@@ -156,6 +163,10 @@ pub fn rasterize(symbol: &ShieldSymbol, opts: &RasterOptions) -> Result<RasterIm
 }
 
 /// Encodes a raster as PNG (straight alpha, sRGB).
+///
+/// # Errors
+///
+/// Fails with [`RasterError::Encode`] for an empty image or an encoder error.
 pub fn encode_png(img: &RasterImage) -> Result<Vec<u8>, RasterError> {
     let mut pixmap = tiny_skia::Pixmap::new(img.width, img.height)
         .ok_or_else(|| RasterError::Encode(format!("{}x{}", img.width, img.height)))?;

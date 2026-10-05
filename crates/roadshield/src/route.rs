@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::error::ShieldError;
 
-/// Normalised route attributes. Network adapters (OpenMapTiles, Americana
+/// Normalised route attributes. Network adapters (`OpenMapTiles`, Americana
 /// sprite IDs, …) build this; the engine never guesses a network from a ref.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -146,7 +146,7 @@ pub struct DisplayContext {
     #[serde(default = "one")]
     pub scale: f64,
     /// Device pixels per layout pixel used for upstream-compatible rounding
-    /// (1 or 2, as MapLibre picks 1x or 2x sprites). Geometry is computed on
+    /// (1 or 2, as `MapLibre` picks 1x or 2x sprites). Geometry is computed on
     /// this grid; the SVG's logical size is unchanged.
     #[serde(default = "one_u8")]
     pub pixel_grid: u8,

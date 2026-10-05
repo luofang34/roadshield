@@ -9,9 +9,10 @@ use roadshield::{Engine, ResourcePack};
 
 /// Pack directory to load.
 pub fn pack_dir() -> PathBuf {
-    std::env::var_os("ROADSHIELD_PACK")
-        .map(PathBuf::from)
-        .unwrap_or_else(|| Path::new(env!("CARGO_MANIFEST_DIR")).join("../../packs/americana"))
+    std::env::var_os("ROADSHIELD_PACK").map_or_else(
+        || Path::new(env!("CARGO_MANIFEST_DIR")).join("../../packs/americana"),
+        PathBuf::from,
+    )
 }
 
 /// Loads and verifies the pack and prepares an engine.

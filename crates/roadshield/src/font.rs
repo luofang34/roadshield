@@ -1,4 +1,4 @@
-//! Font loading, fallback, shaping (HarfRust) and glyph outlines (Skrifa).
+//! Font loading, fallback, shaping (`HarfRust`) and glyph outlines (Skrifa).
 //!
 //! Metrics are kept in em units (font units / unitsPerEm) so one shaping
 //! pass serves every font size the layout needs.
@@ -30,7 +30,7 @@ impl std::fmt::Debug for FontFace {
         f.debug_struct("FontFace")
             .field("id", &self.id)
             .field("upem", &self.upem)
-            .finish()
+            .finish_non_exhaustive()
     }
 }
 
@@ -96,7 +96,7 @@ fn normalized_typo_ascent(font: &harfrust::Font, upem: f64) -> Option<f64> {
 }
 
 /// Distance in px from the em-box top to the alphabetic baseline at `size`.
-/// Blink stores font heights as LayoutUnit (1/64 px), so the value is
+/// Blink stores font heights as `LayoutUnit` (1/64 px), so the value is
 /// rounded to the nearest 1/64 as canvas `textBaseline = "top"` sees it.
 pub fn top_px(top_em: f64, size: f64) -> f64 {
     (top_em * size * 64.0).round() / 64.0
@@ -233,13 +233,12 @@ impl FontStack {
             if !out.faces_used.contains(&fi) {
                 out.faces_used.push(fi);
             }
-            self.shape_run(&mut out, fi, face, &run, direction, lang.clone())?;
+            Self::shape_run(&mut out, fi, face, &run, direction, lang.clone())?;
         }
         Ok(out)
     }
 
     fn shape_run(
-        &self,
         out: &mut ShapedText,
         fi: usize,
         face: &FontFace,

@@ -23,6 +23,7 @@ pub enum Rendering {
 
 impl Rendering {
     /// The symbol, if one was produced.
+    #[must_use]
     pub fn symbol(&self) -> Option<&ShieldSymbol> {
         match self {
             Self::Symbol(s) => Some(s),
@@ -31,6 +32,7 @@ impl Rendering {
     }
 
     /// Semantic cache key of this result.
+    #[must_use]
     pub fn semantic_key(&self) -> &str {
         match self {
             Self::Symbol(s) => &s.semantic_key,
@@ -118,7 +120,7 @@ pub struct Provenance {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum DependencyKind {
-    /// ShieldJSON rules.
+    /// `ShieldJSON` rules.
     Rules,
     /// Blank SVG.
     Blank,

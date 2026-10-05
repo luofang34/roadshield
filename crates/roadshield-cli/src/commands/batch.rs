@@ -100,7 +100,7 @@ struct Writer {
 }
 
 impl Writer {
-    fn emit(&mut self, line_no: usize, key: Option<String>, outcome: Outcome) -> Result<()> {
+    fn emit(&mut self, line_no: usize, key: Option<&str>, outcome: Outcome) -> Result<()> {
         let mut rec = json!({"line": line_no, "semantic_key": key});
         match outcome {
             Outcome::Symbol(s) => {
@@ -244,7 +244,7 @@ pub fn run(m: &ArgMatches) -> Result<()> {
                 stopped = Some("max-items");
                 break 'outer;
             }
-            w.emit(no, key, outcome)?;
+            w.emit(no, key.as_deref(), outcome)?;
             items += 1;
             if w.written > limits.max_output {
                 stopped = Some("max-output-bytes");

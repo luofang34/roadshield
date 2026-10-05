@@ -5,6 +5,7 @@
 use std::collections::BTreeSet;
 use std::path::Path;
 
+use indexmap::IndexMap;
 use roadshield::{Padding, ShapeParams, ShieldDef, ShieldOptions, TextLayoutOptions};
 use serde::Serialize;
 
@@ -22,6 +23,7 @@ pub struct Inventory {
 
 impl Inventory {
     /// One line per missing name, for error reporting.
+    #[must_use]
     pub fn issues(&self) -> Vec<String> {
         self.missing
             .iter()
@@ -77,7 +79,8 @@ fn serde_keys<T: Serialize>(value: &T) -> BTreeSet<String> {
     }
 }
 
-/// Every ShieldJSON definition field the engine models.
+/// Every `ShieldJSON` definition field the engine models.
+#[must_use]
 pub fn known_def_fields() -> BTreeSet<String> {
     let s = || Some(String::new());
     let full = ShieldDef {
@@ -96,23 +99,24 @@ pub fn known_def_fields() -> BTreeSet<String> {
             options: None,
         }),
         banners: Some(Vec::new()),
-        banner_map: Some(Default::default()),
+        banner_map: Some(IndexMap::default()),
         notext: Some(false),
         max_font_size: Some(0.0),
-        refs_by_name: Some(Default::default()),
+        refs_by_name: Some(IndexMap::default()),
         ref_: s(),
         numbering_system: s(),
         vertical_reflect: Some(false),
         color_lighten: s(),
         color_darken: s(),
-        override_by_name: Some(Default::default()),
-        override_by_ref: Some(Default::default()),
+        override_by_name: Some(IndexMap::default()),
+        override_by_ref: Some(IndexMap::default()),
         noref: Some(Box::default()),
     };
     serde_keys(&full)
 }
 
 /// Every shape parameter the engine models.
+#[must_use]
 pub fn known_param_fields() -> BTreeSet<String> {
     let f = Some(0.0);
     let s = || Some(String::new());
@@ -158,6 +162,10 @@ fn set(items: &[&str]) -> BTreeSet<String> {
 }
 
 /// Reads the pinned checkout and compares declarations.
+///
+/// # Errors
+///
+/// Fails with [`ImportError::Io`] if an upstream source file cannot be read.
 pub fn inventory_blocking(checkout: &Path) -> Result<Inventory, ImportError> {
     let read = |rel: &str| -> Result<String, ImportError> {
         Ok(String::from_utf8_lossy(&read_blocking(&checkout.join(rel))?).into_owned())

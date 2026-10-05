@@ -22,6 +22,7 @@ pub struct RoadShield {
 impl RoadShield {
     /// Empty instance; add pack files, then call `load`.
     #[wasm_bindgen(constructor)]
+    #[must_use]
     pub fn new() -> RoadShield {
         RoadShield::default()
     }
@@ -33,6 +34,10 @@ impl RoadShield {
     }
 
     /// Verifies and loads the added files; returns the manifest as JSON.
+    ///
+    /// # Errors
+    ///
+    /// Throws the pack error message if the files do not form a valid pack.
     pub fn load(&mut self) -> Result<String, JsValue> {
         let pack = ResourcePack::load(&self.files).map_err(js_err)?;
         let engine = Engine::new(pack).map_err(js_err)?;
@@ -49,18 +54,30 @@ impl RoadShield {
     }
 
     /// Network keys with rules (after `bannerMap` expansion) as JSON.
+    ///
+    /// # Errors
+    ///
+    /// Throws if no pack is loaded.
     pub fn networks(&self) -> Result<String, JsValue> {
         let keys: Vec<&str> = self.engine()?.networks().collect();
         serde_json::to_string(&keys).map_err(js_err)
     }
 
     /// The expanded rules (`ShieldSpec`) as JSON.
+    ///
+    /// # Errors
+    ///
+    /// Throws if no pack is loaded.
     pub fn rules(&self) -> Result<String, JsValue> {
         serde_json::to_string(self.engine()?.rules()).map_err(js_err)
     }
 
     /// Advance width of `text` at `font_px` with the pack's font stack, as
     /// canvas `measureText().width` would report it.
+    ///
+    /// # Errors
+    ///
+    /// Throws if no pack is loaded or no font covers a character.
     #[wasm_bindgen(js_name = measureText)]
     pub fn measure_text(&self, text: &str, font_px: f64) -> Result<f64, JsValue> {
         let m = self
@@ -73,6 +90,11 @@ impl RoadShield {
     /// Renders a route (`RouteDescriptor` JSON) with an optional
     /// `DisplayContext` JSON; returns the `Rendering` as JSON. Engine errors
     /// are thrown as JSON strings of `ShieldError`.
+    ///
+    /// # Errors
+    ///
+    /// Throws if no pack is loaded or the JSON is invalid; engine errors are
+    /// thrown as `ShieldError` JSON.
     pub fn render(
         &self,
         route_json: &str,
@@ -90,6 +112,11 @@ impl RoadShield {
     /// Renders straight-alpha sRGB RGBA at `pixel_ratio`. Returns
     /// `[width, height, ...pixels]` packed as bytes after an 8-byte header
     /// (two little-endian u32), or an empty array when no shield is shown.
+    ///
+    /// # Errors
+    ///
+    /// Throws if no pack is loaded, the JSON is invalid, rendering fails or the
+    /// raster options are out of range.
     #[wasm_bindgen(js_name = renderRgba)]
     pub fn render_rgba(
         &self,

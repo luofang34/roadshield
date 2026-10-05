@@ -1,4 +1,4 @@
-//! Serde model of Americana ShieldJSON.
+//! Serde model of Americana `ShieldJSON`.
 //!
 //! Every struct rejects unknown fields so that upstream schema additions fail
 //! loudly at pack load instead of being silently ignored.
@@ -6,7 +6,7 @@
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 
-/// Top-level ShieldJSON document (`shields.json`).
+/// Top-level `ShieldJSON` document (`shields.json`).
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct ShieldSpec {
@@ -214,6 +214,7 @@ pub struct TextLayoutOptions {
 
 impl ShieldDef {
     /// JS object spread `{...self, ...over}`: fields present in `over` win.
+    #[must_use]
     pub fn overlay(&self, over: &ShieldDef) -> ShieldDef {
         macro_rules! pick {
             ($($f:ident),*) => { ShieldDef { $($f: over.$f.clone().or_else(|| self.$f.clone()),)* } };
@@ -246,7 +247,7 @@ impl ShieldDef {
 
 impl ShieldSpec {
     /// Expands every `bannerMap` into extra network entries, as the upstream
-    /// renderer does when it loads ShieldJSON.
+    /// renderer does when it loads `ShieldJSON`.
     ///
     /// Iterates a snapshot of the original entries, so a definition that is
     /// overwritten by an earlier expansion still expands its own map.
