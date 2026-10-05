@@ -23,6 +23,7 @@ struct KeyInput<'a> {
 /// `extra` and `source` are excluded because no rule reads them, and
 /// `expected_pack` because it only gates whether rendering happens, so
 /// pinned and unpinned callers share cache entries.
+#[must_use]
 pub fn semantic_key(
     pack_content_hash: &str,
     route: &RouteDescriptor,

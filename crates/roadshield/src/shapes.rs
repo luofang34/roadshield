@@ -136,7 +136,7 @@ fn style(p: &ShapeParams) -> Style {
     }
 }
 
-fn op(path: Path, s: &Style) -> DrawOp {
+fn op(path: &Path, s: &Style) -> DrawOp {
     DrawOp {
         d: path.data().to_owned(),
         fill: s.fill.clone(),
@@ -185,7 +185,7 @@ fn ellipse(env: &ShapeEnv<'_>, p: &ShapeParams) -> Result<DrawOp, crate::ShieldE
     let ry = env.size / 2.0 - s.line_thick;
     let mut path = Path::new();
     path.ellipse(env.canvas_width / 2.0, env.size / 2.0, rx, ry);
-    Ok(op(path, &s))
+    Ok(op(&path, &s))
 }
 
 fn rounded_rectangle(env: &ShapeEnv<'_>, p: &ShapeParams) -> Result<DrawOp, crate::ShieldError> {
@@ -202,7 +202,7 @@ fn rounded_rectangle(env: &ShapeEnv<'_>, p: &ShapeParams) -> Result<DrawOp, crat
     path.arc_to(x0, y3, x0, y2, r);
     path.arc_to(x0, y0, x1, y0, r);
     path.close();
-    Ok(op(path, &s))
+    Ok(op(&path, &s))
 }
 
 fn escutcheon(env: &ShapeEnv<'_>, p: &ShapeParams) -> Result<DrawOp, crate::ShieldError> {
@@ -228,7 +228,7 @@ fn escutcheon(env: &ShapeEnv<'_>, p: &ShapeParams) -> Result<DrawOp, crate::Shie
     path.line_to(x5, y2);
     path.bezier_to(x5, y3, x4, y4, x3, y5);
     path.close();
-    Ok(op(path, &s))
+    Ok(op(&path, &s))
 }
 
 fn fishhead(env: &ShapeEnv<'_>, p: &ShapeParams) -> Result<DrawOp, crate::ShieldError> {
@@ -259,7 +259,7 @@ fn fishhead(env: &ShapeEnv<'_>, p: &ShapeParams) -> Result<DrawOp, crate::Shield
     path.bezier_to(x7, y1, x8, y2, x8, y3);
     path.bezier_to(x8, y4, x5, y5, x4, y6);
     path.close();
-    Ok(op(path, &s))
+    Ok(op(&path, &s))
 }
 
 #[cfg(test)]

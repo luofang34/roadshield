@@ -1,5 +1,5 @@
 //! Road shield engine: selects a shield definition for a route from
-//! Americana-compatible ShieldJSON rule data and renders it as a
+//! Americana-compatible `ShieldJSON` rule data and renders it as a
 //! self-contained SVG with layout metadata.
 //!
 //! The engine performs no network or file I/O; rule packs, SVG blanks and

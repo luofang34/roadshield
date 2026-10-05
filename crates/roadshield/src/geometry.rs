@@ -15,6 +15,7 @@ pub struct Rect {
 
 impl Rect {
     /// Rectangle from origin and size.
+    #[must_use]
     pub fn new(x: f64, y: f64, width: f64, height: f64) -> Self {
         Self {
             x,
@@ -37,7 +38,7 @@ pub fn num(v: f64) -> String {
     if !v.is_finite() {
         return "0".into();
     }
-    let mut s = format!("{:.4}", v);
+    let mut s = format!("{v:.4}");
     if s.contains('.') {
         while s.ends_with('0') {
             s.pop();

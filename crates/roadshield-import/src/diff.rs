@@ -137,6 +137,7 @@ fn defs(engine: &Engine) -> BTreeMap<String, Value> {
 }
 
 /// Compares two loaded packs.
+#[must_use]
 pub fn diff_packs(old: &Engine, new: &Engine) -> PackDiff {
     let (mo, mn): (&Manifest, &Manifest) = (old.manifest(), new.manifest());
     let (dold, dnew) = (defs(old), defs(new));
@@ -212,6 +213,7 @@ pub fn diff_packs(old: &Engine, new: &Engine) -> PackDiff {
 
 impl PackDiff {
     /// True when the packs are identical in every compared respect.
+    #[must_use]
     pub fn is_empty(&self) -> bool {
         self.networks.is_empty()
             && self.options.is_empty()
@@ -222,6 +224,7 @@ impl PackDiff {
     }
 
     /// Markdown summary for review.
+    #[must_use]
     pub fn to_markdown(&self) -> String {
         let mut s = String::new();
         push_line(
@@ -368,6 +371,7 @@ fn affected_networks(new: &Engine, diff: &PackDiff) -> Vec<String> {
 }
 
 /// Self-contained HTML page rendering affected networks with both packs.
+#[must_use]
 pub fn visual_report_html(old: &Engine, new: &Engine, diff: &PackDiff) -> String {
     let mut rows = String::new();
     for network in affected_networks(new, diff) {

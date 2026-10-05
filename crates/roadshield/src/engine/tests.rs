@@ -11,7 +11,7 @@ fn missing_blank_is_an_error_not_an_empty_image() {
     let mut files = pack_files();
     edit_manifest(&mut files, |m| {
         m.blanks
-            .retain(|b| !b.id.starts_with("shield_us_interstate_"))
+            .retain(|b| !b.id.starts_with("shield_us_interstate_"));
     });
     let engine = engine_from(&files);
     let err = engine

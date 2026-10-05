@@ -137,7 +137,7 @@ pub enum PackError {
         /// Computed hash.
         actual: String,
     },
-    /// JSON could not be parsed (includes unknown ShieldJSON fields).
+    /// JSON could not be parsed (includes unknown `ShieldJSON` fields).
     #[error("{path:?} is not valid: {detail}")]
     Json {
         /// Path within the pack.

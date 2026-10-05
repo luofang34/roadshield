@@ -11,17 +11,20 @@ impl Rgba {
     pub const WHITE: Rgba = Rgba([255, 255, 255, 255]);
 
     /// Parses any CSS colour string (`#rgb`, names, `hsl()`, …).
+    #[must_use]
     pub fn parse(css: &str) -> Option<Rgba> {
         csscolorparser::parse(css).ok().map(|c| Rgba(c.to_rgba8()))
     }
 
     /// `#rrggbb` for SVG paint attributes.
+    #[must_use]
     pub fn hex(self) -> String {
         let [r, g, b, _] = self.0;
         format!("#{r:02x}{g:02x}{b:02x}")
     }
 
     /// Alpha in `0..=1`.
+    #[must_use]
     pub fn opacity(self) -> f64 {
         f64::from(self.0[3]) / 255.0
     }
@@ -42,6 +45,10 @@ pub struct Recolor {
 impl Recolor {
     /// Builds the transform from the definition's optional CSS colours.
     /// `None` when neither is set (truthiness as upstream).
+    ///
+    /// # Errors
+    ///
+    /// Returns a message naming the colour when either value is not a CSS colour.
     pub fn from_css(
         lighten: Option<&str>,
         darken: Option<&str>,
@@ -62,6 +69,7 @@ impl Recolor {
     }
 
     /// Applies the transform to one colour.
+    #[must_use]
     pub fn apply(self, c: Rgba) -> Rgba {
         let ch = |i: usize| -> u8 {
             let s = f64::from(c.0.get(i).copied().unwrap_or(0));
