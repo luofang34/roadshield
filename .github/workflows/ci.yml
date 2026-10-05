@@ -92,6 +92,33 @@ jobs:
           name: oracle-sweep
           path: target/oracle/
 
+  contribution:
+    # The Americana contribution draft (contrib/americana) must add exactly
+    # the pack's extensions and draw them as roadshield does.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: cargo install wasm-pack --locked
+      - name: Build upstream with the draft applied
+        run: |
+          ./scripts/fetch-upstream.sh
+          ./oracle/prepare-contribution.sh
+      - run: wasm-pack build crates/roadshield-wasm --release --target web --out-dir ../../target/wasm-web
+      - name: Install Google Chrome
+        working-directory: .upstream/americana-contrib
+        run: npx playwright install --with-deps chrome
+      - name: Sweep including extensions (2x)
+        env:
+          ORACLE_CHROME_CHANNEL: chrome
+        run: node oracle/sweep.mjs --upstream .upstream/americana-contrib --include-extensions --dpr 2 --out target/oracle-contrib
+
   pack-artifacts:
     needs: gate
     if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
