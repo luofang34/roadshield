@@ -99,6 +99,33 @@ cargo run -p roadshield --example readme_images   # regenerates docs/images
 They read the pack from `ROADSHIELD_PACK`, defaulting to this repository's
 `packs/americana`.
 
+## Networks beyond Americana
+
+`packs/americana.extensions.json` adds networks Americana does not draw
+yet, currently `BAB` (German Autobahn, Zeichen 405) and `AH` (Asian
+Highway). They are kept apart from upstream's rules:
+
+- The pack stores them in `rules/extensions.json`; upstream's rules file
+  stays byte-identical. Every symbol reports `rule.origin` (`upstream` or
+  `extension`).
+- An extension may never redefine an upstream network: the import and
+  `ResourcePack::load` both fail if it does. When Americana adopts a
+  network, delete the extension (the error says when the definitions are
+  identical).
+- The oracle sweep compares upstream networks only; extensions have their
+  own tests (`crates/roadshield/tests/extensions.rs`). The same definitions
+  are written as an Americana contribution draft in `contrib/americana`;
+  `oracle/prepare-contribution.sh` checks that the draft adds exactly these
+  networks, and `oracle/sweep.mjs --include-extensions` compares them
+  against upstream's renderer with the draft applied.
+- The weekly `upstream-canary` workflow runs `roadshield upstream-check`
+  on Americana's latest `main` and opens an issue when upstream changed:
+  an update to import, semantics to port, or extensions upstream adopted.
+
+Extension data is CC0 so it can be contributed upstream.
+
+![Extension networks](https://github.com/luofang34/roadshield/raw/main/docs/images/extensions.svg)
+
 ## Text halo joins
 
 Text on generic and bannered shields gets a light halo. Americana draws it

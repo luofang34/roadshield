@@ -1,0 +1,43 @@
+From 67949a3876a6f43d404041f6414889b6a7caebdc Mon Sep 17 00:00:00 2001
+From: sokoly <sokoly@sokolysystems.com>
+Date: Mon, 5 Oct 2026 13:26:23 -0400
+Subject: [PATCH] Add shields for German Autobahns and the Asian Highway
+ Network
+
+network=BAB (190 route relations) is drawn as Zeichen 405: white on a blue
+horizontal hexagon. network=AH (32 route relations) follows annex III of
+the Intergovernmental Agreement on the Asian Highway Network: a
+rectangular sign with AH and the route number, white on blue as most
+member states sign it. Both use existing shape helpers; no new artwork.
+---
+ src/js/shield_defs.js | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/src/js/shield_defs.js b/src/js/shield_defs.js
+index ae7deef..49ed284 100644
+--- a/src/js/shield_defs.js
++++ b/src/js/shield_defs.js
+@@ -3577,6 +3577,10 @@ export function loadShields() {
+   );
+ 
+   // ASIA
++  // Asian Highway Network. The Intergovernmental Agreement (annex III)
++  // specifies a rectangular sign with "AH" and the route number in white or
++  // black; most member states sign it white on blue.
++  shields["AH"] = roundedRectShield(Color.shields.blue, Color.shields.white);
+ 
+   // Armenia
+   shields["am:national"] = roundedRectShield(
+@@ -4287,6 +4291,12 @@ export function loadShields() {
+   });
+ 
+   // Germany
++  // Bundesautobahn: Zeichen 405, white on a blue horizontal hexagon.
++  shields["BAB"] = hexagonHorizontalShield(
++    30,
++    Color.shields.blue,
++    Color.shields.white
++  );
+   shields["DE:national"] = roundedRectShield(
+     Color.shields.yellow,
+     Color.shields.black,
