@@ -3,7 +3,7 @@
 
 use std::path::Path;
 
-use roadshield::{DisplayContext, Engine, Rendering, RouteDescriptor};
+use roadshield::{DisplayContext, Engine, Rendering, RouteDescriptor, TextHaloJoin};
 use roadshield_raster::{AlphaMode, RasterOptions, rasterize};
 use serde::Deserialize;
 
@@ -116,7 +116,12 @@ fn sizes_and_pixels_match_the_upstream_renderer() {
     let mut pixel_report = Vec::new();
     for c in fixture().cases {
         let label = format!("{} {:?} {:?}", c.network, c.ref_, c.name);
-        let Rendering::Symbol(s) = e.render(&route(&c), &DisplayContext::default()).unwrap() else {
+        // Upstream's own halo joins, for a like-for-like comparison.
+        let ctx = DisplayContext {
+            text_halo_join: TextHaloJoin::AMERICANA,
+            ..DisplayContext::default()
+        };
+        let Rendering::Symbol(s) = e.render(&route(&c), &ctx).unwrap() else {
             size_report.push(format!("{label}: no shield"));
             continue;
         };

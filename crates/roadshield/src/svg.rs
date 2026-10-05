@@ -2,6 +2,7 @@
 
 use crate::color::Rgba;
 use crate::geometry::num;
+use crate::route::TextHaloJoin;
 
 /// Escapes text for XML content and attribute values.
 pub fn escape(s: &str) -> String {
@@ -48,3 +49,19 @@ pub fn stroke_style(width: f64) -> String {
         num(width)
     )
 }
+
+/// Stroke attributes for a text halo of `width` with the chosen joins.
+pub fn halo_stroke_style(width: f64, join: TextHaloJoin) -> String {
+    let w = num(width);
+    match join {
+        TextHaloJoin::Round => format!("stroke-width=\"{w}\" stroke-linejoin=\"round\""),
+        TextHaloJoin::Bevel => format!("stroke-width=\"{w}\" stroke-linejoin=\"bevel\""),
+        TextHaloJoin::Miter { limit } => format!(
+            "stroke-width=\"{w}\" stroke-linejoin=\"miter\" stroke-miterlimit=\"{}\"",
+            num(limit)
+        ),
+    }
+}
+
+#[cfg(test)]
+mod tests;

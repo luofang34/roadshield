@@ -189,7 +189,9 @@ const result = await page.evaluate(
       const route = JSON.stringify({ network: c.network, ref: c.ref || null, name: c.name || null });
       let ours;
       try {
-        ours = shields.renderRgba(route, JSON.stringify({ pixel_grid: dpr > 1 ? 2 : 1 }), dpr);
+        // Upstream's halo joins (canvas miter, limit 10) for a like-for-like comparison.
+        const context = { pixel_grid: dpr > 1 ? 2 : 1, text_halo_join: { join: "miter", limit: 10 } };
+        ours = shields.renderRgba(route, JSON.stringify(context), dpr);
       } catch (e) {
         failures.push({ ...c, kind: "error", detail: String(e) });
         continue;

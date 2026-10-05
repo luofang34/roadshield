@@ -99,6 +99,25 @@ cargo run -p roadshield --example readme_images   # regenerates docs/images
 They read the pack from `ROADSHIELD_PACK`, defaulting to this repository's
 `packs/americana`.
 
+## Text halo joins
+
+Text on generic and bannered shields gets a light halo. Americana draws it
+with canvas defaults: miter joins, limit 10. At the acute inner corners of
+glyphs such as A, V and M, those miters reach six to seven times the halo
+half-width past the corner, so the halo shows spikes.
+`DisplayContext::text_halo_join` (CLI `--text-halo-join`) chooses the
+corner joins for text halos only; shield artwork and shape outlines keep
+their own joins.
+
+| value | result |
+|---|---|
+| `Round` (default) | even halo around every corner, no spikes |
+| `Bevel` | flat-cut corners, never wider than the halo |
+| `Miter { limit }`, `1..=10` | miter where the corner allows, bevel beyond `limit` |
+| `TextHaloJoin::AMERICANA` | upstream's exact halo (miter, limit 10), spikes included |
+
+![Text halo joins](https://github.com/luofang34/roadshield/raw/main/docs/images/text-halo-joins.svg)
+
 ## Crates
 
 | crate | purpose |

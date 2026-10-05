@@ -5,7 +5,7 @@ use serde::Serialize;
 use crate::route::{DisplayContext, RouteDescriptor};
 
 /// Bumped whenever the engine's output for identical inputs changes.
-pub const ENGINE_OUTPUT_VERSION: &str = "roadshield-1";
+pub const ENGINE_OUTPUT_VERSION: &str = "roadshield-2";
 
 #[derive(Serialize)]
 struct KeyInput<'a> {

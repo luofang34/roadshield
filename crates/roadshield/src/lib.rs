@@ -52,7 +52,7 @@ pub use pack::{
 };
 pub use route::{
     Accessibility, DisplayContext, InputLimits, MissingGlyphPolicy, PackExpectation,
-    RouteDescriptor, TextDirection, UnknownNetworkPolicy,
+    RouteDescriptor, TextDirection, TextHaloJoin, UnknownNetworkPolicy,
 };
 pub use select::{AppliedOverride, MAX_REF_UTF16, is_valid_ref, romanize};
 pub use shapes::SHAPES;

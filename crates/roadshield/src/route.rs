@@ -86,6 +86,35 @@ pub enum MissingGlyphPolicy {
     Notdef,
 }
 
+/// How the outer stroke (halo) around shield and banner text joins at
+/// outline corners. Shield blanks, shape outlines and other geometry keep
+/// their own joins.
+///
+/// Upstream strokes text with canvas defaults (miter, limit 10). At the
+/// acute inner corners of glyphs such as A, V and M (16–19° in Noto Sans
+/// Condensed) that miter extends six to seven times the half-width past
+/// the corner, through the letter, and shows as a spike.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Serialize, Deserialize)]
+#[serde(tag = "join", rename_all = "snake_case", deny_unknown_fields)]
+pub enum TextHaloJoin {
+    /// Round joins: the halo is the same width around every corner.
+    #[default]
+    Round,
+    /// Bevel joins: corners are cut flat, never wider than the halo.
+    Bevel,
+    /// Miter joins; corners sharper than `limit` allows fall back to bevel.
+    /// `limit` is in `1..=10`, so no setting reaches beyond upstream's.
+    Miter {
+        /// Ratio of miter length to stroke width (SVG `stroke-miterlimit`).
+        limit: f64,
+    },
+}
+
+impl TextHaloJoin {
+    /// Upstream Americana's halo: canvas miter joins with limit 10.
+    pub const AMERICANA: TextHaloJoin = TextHaloJoin::Miter { limit: 10.0 };
+}
+
 /// Accessibility-related display options.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -145,6 +174,11 @@ pub struct DisplayContext {
     /// Missing glyph handling.
     #[serde(default)]
     pub missing_glyph: MissingGlyphPolicy,
+    /// Corner joins of the text halo. Round by default, which removes the
+    /// spikes upstream's miter joins draw at acute glyph corners;
+    /// [`TextHaloJoin::AMERICANA`] reproduces upstream exactly.
+    #[serde(default)]
+    pub text_halo_join: TextHaloJoin,
 }
 
 fn one() -> f64 {
@@ -168,6 +202,7 @@ impl Default for DisplayContext {
             accessibility: Accessibility::default(),
             unknown_network: UnknownNetworkPolicy::GenericFallback,
             missing_glyph: MissingGlyphPolicy::Error,
+            text_halo_join: TextHaloJoin::Round,
         }
     }
 }
@@ -195,6 +230,13 @@ impl Default for InputLimits {
 
 impl InputLimits {
     /// Rejects descriptors and contexts outside these bounds.
+    ///
+    /// # Errors
+    ///
+    /// Returns [`ShieldError::InvalidInput`] naming the first field outside the
+    /// limits: oversized or control-character text, too many `extra` entries, a
+    /// scale outside `(0, 64]`, a pixel grid other than 1 or 2, a miter limit
+    /// outside `1..=10`, or an empty or oversized font stack.
     pub fn check(&self, route: &RouteDescriptor, ctx: &DisplayContext) -> Result<(), ShieldError> {
         let fields = [
             ("network", &route.network),
@@ -232,6 +274,14 @@ impl InputLimits {
             return Err(ShieldError::InvalidInput {
                 field: "scale".into(),
                 reason: format!("{} is not in (0, 64]", ctx.scale),
+            });
+        }
+        if let TextHaloJoin::Miter { limit } = ctx.text_halo_join
+            && !(1.0..=10.0).contains(&limit)
+        {
+            return Err(ShieldError::InvalidInput {
+                field: "text_halo_join.limit".into(),
+                reason: format!("{limit} is not in 1..=10"),
             });
         }
         if !matches!(ctx.pixel_grid, 1 | 2) {

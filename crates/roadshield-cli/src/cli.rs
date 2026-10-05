@@ -34,9 +34,18 @@ fn context_args(cmd: Command) -> Command {
             .long("lang")
             .help("BCP 47 language tag for shaping"),
     )
+    .arg(
+        Arg::new("text-halo-join")
+            .long("text-halo-join")
+            .value_name("JOIN")
+            .default_value("round")
+            .help(
+                "Text halo corner joins: round, bevel, americana (miter, limit 10) or miter:LIMIT",
+            ),
+    )
     .arg(path_arg(
         "context",
-        "JSON file with a full DisplayContext (overrides --scale/--lang)",
+        "JSON file with a full DisplayContext (overrides --scale/--lang/--text-halo-join)",
     ))
     .arg(
         Arg::new("strict-network")
