@@ -1,0 +1,48 @@
+{
+  "networks": {
+    "AH": {
+      "shapeBlank": {
+        "drawFunc": "roundedRectangle",
+        "params": {
+          "fillColor": "#003f87",
+          "strokeColor": "white",
+          "radius": 2
+        }
+      },
+      "textLayout": {
+        "constraintFunc": "roundedRect",
+        "options": {
+          "radius": 2
+        }
+      },
+      "padding": {
+        "left": 3,
+        "right": 3,
+        "top": 3,
+        "bottom": 3
+      },
+      "textColor": "white"
+    },
+    "BAB": {
+      "shapeBlank": {
+        "drawFunc": "hexagonHorizontal",
+        "params": {
+          "sideAngle": 0.5235987755982988,
+          "fillColor": "#003f87",
+          "strokeColor": "white",
+          "radius": 2
+        }
+      },
+      "textLayout": {
+        "constraintFunc": "ellipse"
+      },
+      "padding": {
+        "left": 3,
+        "right": 3,
+        "top": 2,
+        "bottom": 2
+      },
+      "textColor": "white"
+    }
+  }
+}

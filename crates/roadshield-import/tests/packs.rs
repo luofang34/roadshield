@@ -103,3 +103,43 @@ fn diff_of_subset_against_full_pack() {
     let html = visual_report_html(&sub, &full, &rev);
     assert!(html.contains("data:image/svg+xml;base64,"));
 }
+
+#[test]
+fn subsets_keep_or_drop_extension_networks() {
+    let full = load_pack_dir_blocking(&pack_dir()).unwrap();
+    let with = cut_subset(
+        &full,
+        &SubsetRequest {
+            networks: vec!["BAB".into(), "DE".into()],
+        },
+    )
+    .unwrap();
+    let pack = ResourcePack::load(&with).unwrap();
+    assert!(pack.extension_networks.contains("BAB"));
+    assert!(!pack.extension_networks.contains("AH"));
+    assert!(
+        pack.manifest
+            .subset
+            .as_ref()
+            .unwrap()
+            .excluded_networks
+            .contains(&"AH".to_owned())
+    );
+    let without = cut_subset(
+        &full,
+        &SubsetRequest {
+            networks: vec!["US:NJ".into()],
+        },
+    )
+    .unwrap();
+    let pack = ResourcePack::load(&without).unwrap();
+    assert!(pack.manifest.extension_rules.is_none());
+    let engine = roadshield::Engine::new(pack).unwrap();
+    let err = engine
+        .render(
+            &RouteDescriptor::new("BAB", "A 1"),
+            &DisplayContext::default(),
+        )
+        .unwrap_err();
+    assert!(matches!(err, ShieldError::NetworkNotInPack { .. }), "{err}");
+}

@@ -102,7 +102,7 @@ const DPRS: &[f32] = &[1.0, 2.0, 3.0];
 fn fallback_text_halo_has_no_spikes_with_round_or_bevel_joins() {
     let e = engine();
     for r in SPIKY_REFS {
-        let route = RouteDescriptor::new("BAB", *r);
+        let route = RouteDescriptor::new("XX:unknown", *r);
         for &scale in SCALES {
             for &dpr in DPRS {
                 // The halo is 2 layout px wide: half-width scale * dpr device px.
@@ -110,7 +110,10 @@ fn fallback_text_halo_has_no_spikes_with_round_or_bevel_joins() {
                 let limit = half + 1.5;
                 for join in [TextHaloJoin::Round, TextHaloJoin::Bevel] {
                     let (s, img) = render(&e, &route, scale, dpr, join);
-                    assert_eq!(s.rule.rule_key, "default", "BAB uses the generic text rule");
+                    assert_eq!(
+                        s.rule.rule_key, "default",
+                        "an unknown network uses the generic text rule"
+                    );
                     let reach = halo_reach(&img, img.height);
                     assert!(
                         reach <= limit,
@@ -135,7 +138,7 @@ fn round_joins_add_no_clipping() {
     let e = engine();
     for r in SPIKY_REFS {
         for &dpr in DPRS {
-            let route = RouteDescriptor::new("BAB", *r);
+            let route = RouteDescriptor::new("XX:unknown", *r);
             let (round_s, round) = render(&e, &route, 1.0, dpr, TextHaloJoin::Round);
             let (miter_s, miter) = render(&e, &route, 1.0, dpr, TextHaloJoin::AMERICANA);
             assert_eq!(
@@ -208,7 +211,7 @@ fn shapes_without_text_halos_render_identically_under_every_join() {
 #[test]
 fn halo_join_is_part_of_the_cache_key() {
     let e = engine();
-    let route = RouteDescriptor::new("BAB", "A 115");
+    let route = RouteDescriptor::new("XX:unknown", "A 115");
     let key = |join| {
         e.semantic_key(
             &route,

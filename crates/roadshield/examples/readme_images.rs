@@ -72,7 +72,43 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     std::fs::create_dir_all(&out_dir)?;
     std::fs::write(out_dir.join("shields.svg"), doc)?;
     std::fs::write(out_dir.join("text-halo-joins.svg"), halo_joins(&engine)?)?;
+    std::fs::write(out_dir.join("extensions.svg"), extensions(&engine)?)?;
     Ok(())
+}
+
+/// The pack's extension networks next to the upstream shields they are
+/// styled after (`e-road`, `DE:national`).
+fn extensions(engine: &Engine) -> Result<String, Box<dyn std::error::Error>> {
+    let routes = [
+        RouteDescriptor::new("BAB", "A 1"),
+        RouteDescriptor::new("BAB", "A 7"),
+        RouteDescriptor::new("BAB", "A 48"),
+        RouteDescriptor::new("BAB", "A 100"),
+        RouteDescriptor::new("AH", "AH1"),
+        RouteDescriptor::new("AH", "AH26"),
+        RouteDescriptor::new("AH", "AH150"),
+        RouteDescriptor::new("e-road", "E 51"),
+        RouteDescriptor::new("DE:national", "B 1"),
+    ];
+    let ctx = DisplayContext {
+        scale: SCALE,
+        ..DisplayContext::default()
+    };
+    let mut x = 0.0;
+    let mut height: f64 = 0.0;
+    let mut body = String::new();
+    for route in &routes {
+        if let Rendering::Symbol(s) = engine.render(route, &ctx)? {
+            body.push_str(&format!("<g transform=\"translate({x} 0)\">{}</g>", s.svg));
+            x += s.width + GAP;
+            height = height.max(s.height);
+        }
+    }
+    let width = x - GAP;
+    Ok(format!(
+        "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" \
+         width=\"{width}\" height=\"{height}\" viewBox=\"0 0 {width} {height}\">{body}</svg>\n"
+    ))
 }
 
 /// One row per text halo join, on a dark background so the light halo
@@ -86,11 +122,11 @@ fn halo_joins(engine: &Engine) -> Result<String, Box<dyn std::error::Error>> {
         ("miter 2", TextHaloJoin::Miter { limit: 2.0 }),
     ];
     let routes = [
-        RouteDescriptor::new("BAB", "A 115"),
-        RouteDescriptor::new("BAB", "A100"),
-        RouteDescriptor::new("BAB", "A111"),
-        RouteDescriptor::new("BAB", "M 5"),
-        RouteDescriptor::new("BAB", "V 7"),
+        RouteDescriptor::new("XX:unknown", "A 115"),
+        RouteDescriptor::new("XX:unknown", "A100"),
+        RouteDescriptor::new("XX:unknown", "A111"),
+        RouteDescriptor::new("XX:unknown", "M 5"),
+        RouteDescriptor::new("XX:unknown", "V 7"),
         RouteDescriptor::new("US:US:Alternate", "1"),
         RouteDescriptor::new("US:NJ:CR", "609"),
     ];
