@@ -12,6 +12,7 @@ mod extension;
 mod files;
 mod inventory;
 mod subset;
+mod upstream_check;
 
 pub use build::{BuildReport, BuildRequest, build_pack_blocking};
 pub use config::{
@@ -27,3 +28,4 @@ pub use files::{
 };
 pub use inventory::{Inventory, inventory_blocking, known_def_fields, known_param_fields};
 pub use subset::{SubsetRequest, cut_subset};
+pub use upstream_check::{CheckRequest, CheckStatus, UpstreamCheck, upstream_check_blocking};

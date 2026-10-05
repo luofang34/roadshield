@@ -132,6 +132,19 @@ fn walk(
     }
 }
 
+/// Validates every definition in `spec` against an arbitrary blank
+/// catalogue, e.g. the icons of an upstream checkout not yet imported.
+#[must_use]
+pub fn validate_rules(spec: &ShieldSpec, blank_exists: &dyn Fn(&str) -> bool) -> Vec<RuleIssue> {
+    let mut out = Vec::new();
+    for (network, def) in &spec.networks {
+        if let Some(def) = def {
+            walk(network, "", def, blank_exists, &mut out);
+        }
+    }
+    out
+}
+
 /// Validates every definition in `spec`.
 pub fn validate(spec: &ShieldSpec, blanks: &HashMap<String, impl Sized>) -> Vec<RuleIssue> {
     let exists = |id: &str| blanks.contains_key(id);

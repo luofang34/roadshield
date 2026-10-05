@@ -22,6 +22,7 @@ pub fn dispatch(m: &ArgMatches) -> Result<()> {
         Some(("diff", sub)) => pack::diff(sub),
         Some(("inspect", sub)) => pack::inspect(sub),
         Some(("bench", sub)) => bench::run(sub),
+        Some(("upstream-check", sub)) => pack::upstream_check(sub),
         _ => anyhow::bail!("unknown subcommand"),
     }
 }
