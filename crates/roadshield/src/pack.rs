@@ -4,12 +4,12 @@
 //! The engine never touches the filesystem or network; callers supply bytes
 //! through a [`ResourceResolver`].
 
-use std::collections::HashMap;
+use std::collections::{BTreeSet, HashMap};
 
 use serde::{Deserialize, Serialize};
 
 use crate::error::PackError;
-use crate::model::ShieldSpec;
+use crate::model::{ExtensionSpec, ShieldSpec};
 
 /// Manifest format version understood by this engine.
 pub const MANIFEST_FORMAT: u32 = 1;
@@ -158,6 +158,10 @@ pub struct Manifest {
     pub themes: Vec<String>,
     /// Present for subset packs.
     pub subset: Option<Subset>,
+    /// Networks the pack adds beyond upstream (`ExtensionSpec` JSON).
+    /// Omitted when absent, so packs without extensions keep their hash.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub extension_rules: Option<FileRef>,
 }
 
 impl Manifest {
@@ -180,6 +184,7 @@ impl Manifest {
     #[must_use]
     pub fn files(&self) -> Vec<&FileRef> {
         let mut out = vec![&self.rules];
+        out.extend(self.extension_rules.iter());
         out.extend(self.blanks.iter().map(|b| &b.file));
         out.extend(self.fonts.iter().map(|f| &f.file));
         out.extend(self.licenses.iter().map(|l| &l.file));
@@ -192,8 +197,11 @@ impl Manifest {
 pub struct ResourcePack {
     /// The manifest.
     pub manifest: Manifest,
-    /// Rules with `bannerMap` expanded.
+    /// Upstream rules with `bannerMap` expanded, followed by extension
+    /// networks.
     pub rules: ShieldSpec,
+    /// Network keys that come from the extension rules.
+    pub extension_networks: BTreeSet<String>,
     /// Blank ID → SVG bytes.
     pub blanks: HashMap<String, Vec<u8>>,
     /// Font ID → font bytes.
@@ -269,6 +277,19 @@ impl ResourcePack {
                 detail: e.to_string(),
             })?;
         rules.expand_banner_maps();
+        let extension_networks = match &manifest.extension_rules {
+            None => BTreeSet::new(),
+            Some(file) => {
+                let bytes = read_verified(resolver, file)?;
+                let ext: ExtensionSpec =
+                    serde_json::from_slice(&bytes).map_err(|e| PackError::Json {
+                        path: file.path.clone(),
+                        detail: e.to_string(),
+                    })?;
+                crate::extension::merge(&mut rules.networks, &ext)
+                    .map_err(|networks| PackError::ExtensionConflict { networks })?
+            }
+        };
         let mut blanks = HashMap::new();
         for b in &manifest.blanks {
             blanks.insert(b.id.clone(), read_verified(resolver, &b.file)?);
@@ -290,6 +311,7 @@ impl ResourcePack {
         Ok(Self {
             manifest,
             rules,
+            extension_networks,
             blanks,
             fonts,
         })

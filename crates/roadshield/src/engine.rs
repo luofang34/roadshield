@@ -1,6 +1,6 @@
 //! The public engine: a loaded pack plus pure render calls.
 
-use std::collections::{HashMap, HashSet};
+use std::collections::{BTreeSet, HashMap, HashSet};
 
 use indexmap::IndexMap;
 
@@ -8,6 +8,7 @@ use crate::blank::PreparedBlank;
 use crate::compose::{ComposeEnv, Composed, compose};
 use crate::document;
 use crate::error::{PackError, ShieldError, Warning};
+use crate::extension::RuleOrigin;
 use crate::font::{FontFace, FontStack};
 use crate::key::{ENGINE_OUTPUT_VERSION, semantic_key};
 use crate::pack::{Manifest, ResourcePack};
@@ -42,6 +43,7 @@ pub struct Engine {
     faces: IndexMap<String, FontFace>,
     font_hashes: HashMap<String, String>,
     excluded: HashSet<String>,
+    extension_networks: BTreeSet<String>,
     limits: InputLimits,
 }
 
@@ -92,6 +94,7 @@ impl Engine {
             faces,
             font_hashes,
             excluded,
+            extension_networks: pack.extension_networks,
             limits: InputLimits::default(),
         })
     }
@@ -113,6 +116,19 @@ impl Engine {
     #[must_use]
     pub fn rules(&self) -> &crate::model::ShieldSpec {
         &self.rules
+    }
+
+    /// Whether `network`'s rule comes from upstream or the pack's
+    /// extensions; `None` if the pack has no rule for it.
+    #[must_use]
+    pub fn rule_origin(&self, network: &str) -> Option<RuleOrigin> {
+        if self.extension_networks.contains(network) {
+            Some(RuleOrigin::Extension)
+        } else if self.rules.networks.contains_key(network) {
+            Some(RuleOrigin::Upstream)
+        } else {
+            None
+        }
     }
 
     /// Network keys with rules, after `bannerMap` expansion.
@@ -332,6 +348,12 @@ impl Engine {
         let font_stack = stack.ids();
         let dependencies = self.dependencies(&c, &font_stack);
         let svg = document::svg(&c, &sel.rule_key, &network, ctx);
+        let origin = if sel.fallback {
+            RuleOrigin::Upstream
+        } else {
+            self.rule_origin(&sel.rule_key)
+                .unwrap_or(RuleOrigin::Upstream)
+        };
         let mut warnings = c.warnings.clone();
         if sel.fallback {
             warnings.insert(0, Warning::GenericFallback { network });
@@ -342,6 +364,7 @@ impl Engine {
             ctx.scale / f64::from(ctx.pixel_grid),
             document::Extras {
                 svg,
+                origin,
                 provenance: self.provenance(font_stack),
                 dependencies,
                 semantic_key: key,

@@ -8,14 +8,20 @@ mod build;
 mod config;
 mod diff;
 mod error;
+mod extension;
 mod files;
 mod inventory;
 mod subset;
 
 pub use build::{BuildReport, BuildRequest, build_pack_blocking};
-pub use config::{FontInput, FontLicense, ImportConfig, PinnedInput, UpstreamLicense, UpstreamPin};
+pub use config::{
+    ExtensionInput, FontInput, FontLicense, ImportConfig, PinnedInput, UpstreamLicense, UpstreamPin,
+};
 pub use diff::{PackDiff, diff_packs, visual_report_html};
 pub use error::ImportError;
+pub use extension::{
+    ExtensionConflict, LoadedExtension, extension_conflicts, load_extension_blocking,
+};
 pub use files::{
     load_engine_blocking, load_pack_dir_blocking, read_blocking, sha256_hex, write_blocking,
 };

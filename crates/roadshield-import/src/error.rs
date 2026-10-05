@@ -72,6 +72,14 @@ pub enum ImportError {
         /// One line per issue.
         issues: Vec<String>,
     },
+    /// Extension rules redefine networks upstream defines: upstream adopted
+    /// them, so the extension must be removed or reconciled.
+    #[error("extension rules redefine {} upstream network(s): {}", conflicts.len(),
+        conflicts.iter().map(|c| format!("{} (upstream {}, extension {})", c.network, c.upstream, c.extension)).collect::<Vec<_>>().join("; "))]
+    ExtensionConflict {
+        /// Each conflict with both definitions.
+        conflicts: Vec<crate::extension::ExtensionConflict>,
+    },
     /// The built pack failed to load in the engine.
     #[error("built pack does not load: {0}")]
     Pack(#[from] roadshield::PackError),

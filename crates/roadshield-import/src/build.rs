@@ -12,6 +12,7 @@ use serde::Serialize;
 
 use crate::config::ImportConfig;
 use crate::error::ImportError;
+use crate::extension::{extension_conflicts, load_extension_blocking};
 use crate::files::{read_blocking, read_pinned_blocking, sha256_hex, write_blocking};
 use crate::inventory::{Inventory, inventory_blocking};
 
@@ -25,6 +26,8 @@ pub struct BuildRequest<'a> {
     pub inputs: &'a Path,
     /// Output pack directory (replaced if it already holds a pack).
     pub out_dir: &'a Path,
+    /// Directory of the import config; extension files are relative to it.
+    pub config_dir: &'a Path,
 }
 
 /// What a build produced.
@@ -289,6 +292,53 @@ fn hash_engine_sources(req: &BuildRequest<'_>) -> Result<Vec<UpstreamFile>, Impo
         .collect()
 }
 
+/// Checks extensions against upstream and stages their file; returns the
+/// rules whose blanks the pack must carry.
+fn stage_extension(
+    spec: &ShieldSpec,
+    extension: Option<crate::extension::LoadedExtension>,
+    st: &mut Staged,
+) -> Result<(ShieldSpec, Option<FileRef>), ImportError> {
+    let mut closure = spec.clone();
+    let Some(ext) = extension else {
+        return Ok((closure, None));
+    };
+    let conflicts = extension_conflicts(spec, &ext.spec);
+    if !conflicts.is_empty() {
+        return Err(ImportError::ExtensionConflict { conflicts });
+    }
+    closure.networks.extend(ext.spec.networks);
+    Ok((closure, Some(st.add("rules/extensions.json", ext.bytes))))
+}
+
+/// Extension data shares upstream's licence text (CC0) so it can be
+/// contributed back; it keeps its own attribution.
+fn extension_licence(
+    req: &BuildRequest<'_>,
+    licenses: &mut Vec<LicenseEntry>,
+) -> Result<(), ImportError> {
+    let (Some(ext), Some(upstream_licence)) = (&req.config.extensions, licenses.first()) else {
+        return Ok(());
+    };
+    if ext.license != upstream_licence.id {
+        return Err(ImportError::Json {
+            path: req.config_dir.join(&ext.file),
+            detail: format!(
+                "extension licence {} must match the upstream licence {}",
+                ext.license, upstream_licence.id
+            ),
+        });
+    }
+    let entry = LicenseEntry {
+        id: ext.license.clone(),
+        file: upstream_licence.file.clone(),
+        applies_to: vec!["extensions".into()],
+        attribution: ext.attribution.clone(),
+    };
+    licenses.push(entry);
+    Ok(())
+}
+
 /// Verifies every input, builds the pack, writes it and reloads it through
 /// the engine. Fails on any unimplemented upstream semantics.
 ///
@@ -321,11 +371,14 @@ pub fn build_pack_blocking(req: &BuildRequest<'_>) -> Result<BuildReport, Import
         path: rules_path.clone(),
         detail: e.to_string(),
     })?;
+    let extension = load_extension_blocking(c, req.config_dir)?;
     let mut st = Staged::default();
     let rules = st.add("rules/shields.json", rules_bytes);
-    let blanks = stage_blanks(req, &spec, &mut st)?;
+    let (closure, extension_rules) = stage_extension(&spec, extension, &mut st)?;
+    let blanks = stage_blanks(req, &closure, &mut st)?;
     let (fonts, mut licenses) = stage_fonts(req, &mut st)?;
     stage_blank_license(req, &mut st, &mut licenses)?;
+    extension_licence(req, &mut licenses)?;
     let engine_sources = hash_engine_sources(req)?;
     let mut manifest = Manifest {
         format: MANIFEST_FORMAT,
@@ -347,6 +400,7 @@ pub fn build_pack_blocking(req: &BuildRequest<'_>) -> Result<BuildReport, Import
         licenses,
         themes: c.themes.clone(),
         subset: None,
+        extension_rules,
     };
     manifest.content_hash = manifest.compute_content_hash()?;
     let engine = staged_engine(&st, &manifest)?;
