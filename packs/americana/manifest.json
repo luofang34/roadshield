@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "americana",
-  "content_hash": "33d4378f6b5792223feb63f48f9102224925705103ea8528e493553a57a111f0",
+  "content_hash": "1f2d26da74aafc4e3d461efc58a73f7ea1907e2326a5772618b927e733e6c3b6",
   "upstream": {
     "repository": "https://github.com/osm-americana/openstreetmap-americana",
     "commit": "a6817efecac86762896052379248cc3bc98cfae8",
@@ -2705,10 +2705,27 @@
         "noto-sans-georgian-condensed-medium"
       ],
       "attribution": "Copyright 2022 The Noto Project Authors"
+    },
+    {
+      "id": "CC0-1.0",
+      "file": {
+        "path": "licenses/CC0-1.0.txt",
+        "blake3": "b7a6a1ef44aa3647db780392b4fa023c613fd9fa482678bb7a729e5fe385ca00",
+        "bytes": 7048
+      },
+      "applies_to": [
+        "extensions"
+      ],
+      "attribution": "roadshield contributors; definitions offered to OpenStreetMap Americana"
     }
   ],
   "themes": [
     "default"
   ],
-  "subset": null
+  "subset": null,
+  "extension_rules": {
+    "path": "rules/extensions.json",
+    "blake3": "d774d1deb1a7572457773c1a06f2e2796ee81b44b91c57d375ee4cda6953244d",
+    "bytes": 944
+  }
 }

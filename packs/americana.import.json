@@ -81,5 +81,10 @@
     "shieldlib/src/shield_renderer.ts",
     "shieldlib/src/shield_helper.ts",
     "shieldlib/src/types.ts"
-  ]
+  ],
+  "extensions": {
+    "file": "americana.extensions.json",
+    "license": "CC0-1.0",
+    "attribution": "roadshield contributors; definitions offered to OpenStreetMap Americana"
+  }
 }

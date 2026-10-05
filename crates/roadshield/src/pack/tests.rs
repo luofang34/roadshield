@@ -82,3 +82,45 @@ fn manifest_format_and_stack_are_checked() {
         Err(PackError::Manifest { .. })
     ));
 }
+
+#[test]
+fn extension_rules_merge_and_may_not_redefine_upstream() {
+    let pack = ResourcePack::load(&pack_files()).unwrap();
+    assert!(pack.extension_networks.contains("BAB") && pack.extension_networks.contains("AH"));
+    assert!(pack.rules.networks.contains_key("BAB"));
+
+    let mut files = pack_files();
+    let mut ext: serde_json::Value =
+        serde_json::from_slice(&files["rules/extensions.json"]).unwrap();
+    ext["networks"]["e-road"] = ext["networks"]["AH"].clone();
+    let bytes = serde_json::to_vec(&ext).unwrap();
+    let hash = blake3::hash(&bytes).to_hex().to_string();
+    let len = bytes.len();
+    files.insert("rules/extensions.json".into(), bytes);
+    edit_manifest(&mut files, |m| {
+        if let Some(f) = m.extension_rules.as_mut() {
+            f.blake3 = hash;
+            f.bytes = len;
+        }
+    });
+    let err = ResourcePack::load(&files).unwrap_err();
+    assert!(
+        matches!(&err, PackError::ExtensionConflict { networks } if networks == &["e-road".to_owned()]),
+        "{err}"
+    );
+}
+
+#[test]
+fn packs_without_extensions_keep_their_manifest_hash() {
+    let mut files = pack_files();
+    edit_manifest(&mut files, |m| m.extension_rules = None);
+    let m: Manifest = serde_json::from_slice(&files[MANIFEST_PATH]).unwrap();
+    let json = serde_json::to_string(&m).unwrap();
+    assert!(
+        !json.contains("extension_rules"),
+        "absent field is not serialised"
+    );
+    let pack = ResourcePack::load(&files).unwrap();
+    assert!(pack.extension_networks.is_empty());
+    assert!(!pack.rules.networks.contains_key("BAB"));
+}
